@@ -5,3 +5,54 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+# puts "clearing db..."
+
+# Makeup.destroy_all
+# Review.destroy_all
+# User.destroy_all
+
+Faker::Lorem.unique.clear
+Faker::Name.unique.clear
+Faker::Address.unique.clear
+Faker::Internet.unique.clear
+Faker::FunnyName.unique.clear
+Faker::Device.unique.clear
+
+
+
+
+response = RestClient.get("https://makeup-api.herokuapp.com/api/v1/products.json")
+makeup_array = JSON.parse(response)
+
+puts "Making makeup..."
+ makeup_array.each do |makeup|
+    Makeup.create!(
+        product_type: makeup["product_type"], 
+        category: makeup["category"], 
+        brand: makeup["brand"], 
+        price_sign: makeup["price_sign"], 
+        price: makeup["price"], 
+        description: makeup["description"], 
+        image: makeup["api_featured_image"], 
+        product_colors: makeup["product_colors"]
+        )
+end 
+
+
+puts "Making users..."
+5.times {User.create(username:Faker::FunnyName.unique.name,
+                     email:Faker::Internet.unique.email,
+                     password:Faker::Device.unique.serial)}
+
+
+puts "Making reviews..."
+20.times {Review.create!(rating: rand(1..10),
+                    description: Faker::Lorem.unique.paragraph,
+                    username: Faker::Name.unique.initials,
+                    location: Faker::Address.unique.state,
+                    user: User.all.sample,
+                    makeup: Makeup.all.sample
+                    )}
+
+
+
