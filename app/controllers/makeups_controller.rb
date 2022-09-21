@@ -19,7 +19,7 @@ class MakeupsController < ApplicationController
 
     private
     def makeup_params
-        params.permit(:product_type,:category,:brand,:price_sign,:price,:description,:image)
+        params.permit(:name,:product_type,:category,:brand,:currency,:price,:description,:image)
     end
 
     def makeup_id

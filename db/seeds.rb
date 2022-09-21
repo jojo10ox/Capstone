@@ -27,15 +27,16 @@ makeup_array = JSON.parse(response)
 puts "Making makeup..."
  makeup_array.each do |makeup|
     Makeup.create!(
+        name: makeup["name"],
         product_type: makeup["product_type"], 
         category: makeup["category"], 
         brand: makeup["brand"], 
-        price_sign: makeup["price_sign"], 
+        currency: makeup["currency"], 
         price: makeup["price"], 
         description: makeup["description"], 
         image: makeup["api_featured_image"], 
         product_colors: makeup["product_colors"]
-        )
+        ) 
 end 
 
 

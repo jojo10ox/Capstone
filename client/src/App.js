@@ -1,23 +1,73 @@
-import logo from './logo.svg';
 import './App.css';
+import Home from './components/Home';
+import Login from './components/Login';
+import Signup from './components/Signup';
+import Navbar from './components/Navbar';
+import { Route } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
+import { useState, useEffect } from "react";
+import MakeupContainer from './components/MakeupContainer';
+import Makeup from './components/Makeup';
+
+
 
 function App() {
+
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [currentUser, setCurrentUser] = useState(null);
+  const [makeup, setMakeup] = useState([])
+  const [errors, setErrors] = useState(false)
+
+  useEffect(() => {
+    fetch('/makeups').then(res => {
+      if(res.ok){
+      res.json().then(setMakeup)
+      } else {
+      res.json().then((data) => {
+        setErrors(data.error)
+      });
+      }
+    });
+    }, [])
+  
+
+  useEffect(() => {
+    fetch("/me").then((res) => {
+      if (res.ok) {
+        res.json().then((user) => {
+          setCurrentUser(user);
+          setIsAuthenticated(true);
+        });
+      }
+    });
+  }, []);
+
+  console.log(currentUser)
+
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Navbar/>
+        <Switch>
+          <Route exact path="/">
+            <Home/>
+          </Route>
+          <Route exact path="/signup">
+            <Signup setCurrentUser={setCurrentUser}/>
+          </Route>
+        <Route exact path="/login">
+            <Login 
+              setCurrentUser={setCurrentUser}
+            />
+        </Route>
+        <Route exact path="/makeup">
+            <Makeup/>
+            <MakeupContainer
+              makeups={makeup}
+            />
+        </Route>
+        </Switch>
     </div>
   );
 }

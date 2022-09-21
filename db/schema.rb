@@ -16,10 +16,11 @@ ActiveRecord::Schema.define(version: 2022_09_19_212441) do
   enable_extension "plpgsql"
 
   create_table "makeups", force: :cascade do |t|
+    t.string "name"
     t.string "product_type"
     t.string "category"
     t.string "brand"
-    t.string "price_sign"
+    t.string "currency"
     t.integer "price"
     t.string "description"
     t.string "image"
