@@ -1,6 +1,9 @@
 import { useState } from "react";
 
 function Signup({setCurrentUser}){
+    
+
+    const[errors, setErrors] = useState([])
 
     const [formData, setFormData] = useState({
         username: "",
@@ -18,6 +21,7 @@ function Signup({setCurrentUser}){
 
     function handleSubmit(e) {
         e.preventDefault();
+        e.target.reset()
     
         const userCreds = { ...formData };
     
@@ -33,9 +37,7 @@ function Signup({setCurrentUser}){
               setCurrentUser(user);
             });
           } else {
-            res.json().then((errors) => {
-              console.error(errors);
-            });
+            res.json().then((json) => setErrors(json.errors));
           }
         });
       }
@@ -67,6 +69,7 @@ function Signup({setCurrentUser}){
           onChange={handleChange}
         />
         <button type="submit">Submit</button>
+        {errors ? <div>{errors}</div> : null}
       </form>
     );
 }

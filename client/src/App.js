@@ -7,16 +7,22 @@ import { Route } from 'react-router-dom';
 import { Switch } from 'react-router-dom';
 import { useState, useEffect } from "react";
 import MakeupContainer from './components/MakeupContainer';
-import Makeup from './components/Makeup';
+import DisplayReviews from './components/DisplayReviews'
+import SpecificItem from './components/SpecificItem';
+import NewReview from './components/NewReview';
+import { useParams } from "react-router-dom";
 
 
 
 function App() {
 
+
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [currentUser, setCurrentUser] = useState(null);
+  const [currentUser, setCurrentUser] = useState("");
   const [makeup, setMakeup] = useState([])
+  const [reviews, setReviews] = useState([])
   const [errors, setErrors] = useState(false)
+  
 
   useEffect(() => {
     fetch('/makeups').then(res => {
@@ -42,7 +48,25 @@ function App() {
     });
   }, []);
 
-  console.log(currentUser)
+  useEffect(() => {
+    fetch('/reviews').then(res => {
+      if(res.ok){
+      res.json().then(setReviews)
+      } else {
+      res.json().then((data) => {
+        setErrors(data.error)
+      });
+      }
+    });
+    }, [])
+
+  // add review
+  const addReview = (newReview) => {
+    setReviews([...reviews, newReview])
+  }
+  
+console.log(currentUser)
+ 
 
 
 
@@ -62,11 +86,21 @@ function App() {
             />
         </Route>
         <Route exact path="/makeup">
-            <Makeup/>
             <MakeupContainer
               makeups={makeup}
             />
         </Route>
+        <Route exact path="/makeup/:id">
+            <SpecificItem/>
+            <DisplayReviews/>
+          </Route>
+          <Route exact path="/review">
+            <NewReview
+            currentUserId={currentUser.id}
+            makeup={makeup}
+            addReview={addReview}
+            />
+          </Route>
         </Switch>
     </div>
   );

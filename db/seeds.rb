@@ -48,9 +48,9 @@ puts "Making users..."
 
 puts "Making reviews..."
 20.times {Review.create!(rating: rand(1..10),
+                    description_title:Faker::Lorem.unique.paragraph,
                     description: Faker::Lorem.unique.paragraph,
-                    username: Faker::Name.unique.initials,
-                    location: Faker::Address.unique.state,
+                    state: Faker::Address.unique.state,
                     user: User.all.sample,
                     makeup: Makeup.all.sample
                     )}

@@ -2,7 +2,7 @@ import { useState } from "react";
 
 function Login({setCurrentUser}) {
 
-  
+   const[errors, setErrors] = useState([])
 
     const [formData, setFormData] = useState({
         username: "",
@@ -19,6 +19,7 @@ function Login({setCurrentUser}) {
 
     function handleSubmit(e){
         e.preventDefault()
+        e.target.reset()
 
         fetch("/login", {
             method: "POST",
@@ -32,9 +33,7 @@ function Login({setCurrentUser}) {
                 setCurrentUser(user);
               });
             } else {
-              res.json().then((errors) => {
-                console.error(errors);
-              });
+              res.json().then((json) => setErrors(json.errors));
             }
           });
         };
@@ -75,6 +74,7 @@ function Login({setCurrentUser}) {
         <div>
             <button onClick={handleLogout}>Logout</button>
         </div>
+        {errors ? <div>{errors}</div> : null}
       </div>
      
   

@@ -12,7 +12,7 @@ const displayMakeup = makeups.map((makeup)=>{
 
 })
     return(
-        <div className="card">
+        <div className="grid lg:grid-cols-5 md:grid-cols-3 gap-y-5 gap-x-9 p-4 ">
            {displayMakeup}
         </div>
     )
