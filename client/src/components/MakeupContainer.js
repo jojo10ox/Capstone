@@ -1,6 +1,10 @@
 import MakeupCard from "./MakeupCard";
 
+
 function MakeupContainer({makeups}){
+    // console.log(makeups)
+
+
 
 const displayMakeup = makeups.map((makeup)=>{
     return(

@@ -14,6 +14,7 @@ import { useParams } from "react-router-dom";
 
 
 
+
 function App() {
 
 
@@ -27,7 +28,9 @@ function App() {
   useEffect(() => {
     fetch('/makeups').then(res => {
       if(res.ok){
-      res.json().then(setMakeup)
+      res.json().then(data=>{
+        setMakeup(data)
+      })
       } else {
       res.json().then((data) => {
         setErrors(data.error)
@@ -35,8 +38,9 @@ function App() {
       }
     });
     }, [])
-  
 
+    // console.log(makeup)
+  
   useEffect(() => {
     fetch("/me").then((res) => {
       if (res.ok) {
@@ -54,15 +58,19 @@ function App() {
       res.json().then(setReviews)
       } else {
       res.json().then((data) => {
-        setErrors(data.error)
+        setErrors(data.errors)
       });
       }
     });
     }, [])
 
   // add review
-  const addReview = (newReview) => {
-    setReviews([...reviews, newReview])
+  const addReview = (review) => setReviews(current => [...current,review])
+console.log(reviews)
+  // add update 
+  function onUpdateReview(updatedReview){
+    const freshReview = reviews.map(review => review.id === updatedReview.id? updatedReview: review)
+    setReviews(freshReview)
   }
   
 console.log(currentUser)
@@ -96,8 +104,6 @@ console.log(currentUser)
           </Route>
           <Route exact path="/review">
             <NewReview
-            currentUserId={currentUser.id}
-            makeup={makeup}
             addReview={addReview}
             />
           </Route>

@@ -10,7 +10,7 @@ class UsersController < ApplicationController
         if current_user
             render json: current_user, status: :ok
           else
-            render json: "No current session stored", status: :unauthorized
+            render json: {errors: "No current session stored"}, status: :unauthorized
           end
     end
 

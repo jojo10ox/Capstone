@@ -21,39 +21,39 @@ Faker::Device.unique.clear
 
 
 
-response = RestClient.get("https://makeup-api.herokuapp.com/api/v1/products.json")
-makeup_array = JSON.parse(response)
+# response = RestClient.get("https://makeup-api.herokuapp.com/api/v1/products.json")
+# makeup_array = JSON.parse(response)
 
-puts "Making makeup..."
- makeup_array.each do |makeup|
-    Makeup.create!(
-        name: makeup["name"],
-        product_type: makeup["product_type"], 
-        category: makeup["category"], 
-        brand: makeup["brand"], 
-        currency: makeup["currency"], 
-        price: makeup["price"], 
-        description: makeup["description"], 
-        image: makeup["api_featured_image"], 
-        product_colors: makeup["product_colors"]
-        ) 
-end 
-
-
-puts "Making users..."
-5.times {User.create(username:Faker::FunnyName.unique.name,
-                     email:Faker::Internet.unique.email,
-                     password:Faker::Device.unique.serial)}
+# puts "Making makeup..."
+#  makeup_array.each do |makeup|
+#     Makeup.create!(
+#         name: makeup["name"],
+#         product_type: makeup["product_type"], 
+#         category: makeup["category"], 
+#         brand: makeup["brand"], 
+#         currency: makeup["currency"], 
+#         price: makeup["price"], 
+#         description: makeup["description"], 
+#         image: makeup["api_featured_image"], 
+#         product_colors: makeup["product_colors"]
+#         ) 
+# end 
 
 
-puts "Making reviews..."
-20.times {Review.create!(rating: rand(1..10),
-                    description_title:Faker::Lorem.unique.paragraph,
-                    description: Faker::Lorem.unique.paragraph,
-                    state: Faker::Address.unique.state,
-                    user: User.all.sample,
-                    makeup: Makeup.all.sample
-                    )}
+# puts "Making users..."
+# 5.times {User.create(username:Faker::FunnyName.unique.name,
+#                      email:Faker::Internet.unique.email,
+#                      password:Faker::Device.unique.serial)}
+User.create(username:"remy123", email: "remy123", password: "12345")
+
+# puts "Making reviews..."
+# 20.times {Review.create(rating: rand(1..10),
+#                     description_title:Faker::Lorem.unique.paragraph,
+#                     description: Faker::Lorem.unique.paragraph,
+#                     state: Faker::Address.unique.state,
+#                     user: User.all.sample,
+#                     makeup: Makeup.all.sample
+#                     )}
 
 
 
