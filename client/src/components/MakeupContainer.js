@@ -2,7 +2,7 @@ import MakeupCard from "./MakeupCard";
 
 
 function MakeupContainer({makeups}){
-    // console.log(makeups)
+//  console.log(makeups)
 
 
 

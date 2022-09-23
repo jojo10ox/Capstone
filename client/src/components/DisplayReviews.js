@@ -3,12 +3,14 @@ import { useState, useEffect } from "react";
 
 import ReviewCard from "./ReviewCard";
 import NewReview from "./NewReview";
+import { useSearchParams } from "react-router-dom";
 
 
 
-function DisplayReviews(){
+function DisplayReviews({addReview}){
     
-
+    const [searchparams] = useSearchParams();
+    console.log(searchparams.get("id"))
 
     let {id} = useParams();
 
@@ -19,7 +21,7 @@ function DisplayReviews(){
 		fetch(`/makeups/${id}`)
 			.then((res) => res.json())
 			.then((data) => {
-                console.log(data)
+                // console.log(data)
 				setReviews(data);
 			});
 	}, [id]);
@@ -41,7 +43,7 @@ function DisplayReviews(){
                Write a Review
             </button></Link> */}
             <div>
-            <NewReview makeupId={reviews.makeup_id} currentUserId={reviews.user_id}/>
+            {/* <NewReview makeupId={reviews.makeup_id} currentUserId={reviews.user_id} addReview={addReview}/> */}
             </div>
           
          

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
-function NewReview({addReview, currentUserId, makeupId}){
-
+function NewReview({addReview, currentUserId, makeupId, reviews, setReviews, getDat}){
+//  console.log(reviews)
     const[formData, setFormData] = useState({
         rating: "",
         description_title: "",
@@ -12,6 +12,7 @@ function NewReview({addReview, currentUserId, makeupId}){
 
     function handleChange(e){ setFormData({...formData, [e.target.id] : e.target.value }) }
 
+  
 
     function handleSubmit(e){
         e.preventDefault()
@@ -34,7 +35,9 @@ function NewReview({addReview, currentUserId, makeupId}){
         })
         .then(res => {
           if(res.ok){
+            // res.json().then((review)=>setReviews([...reviews, review]))
             res.json().then(addReview)
+            // ((reviewss) => addReview(reviewss))
           } else {
             //Display errors
             res.json().then((json) => setErrors(json.errors));
@@ -42,9 +45,8 @@ function NewReview({addReview, currentUserId, makeupId}){
         })
       }
 
-  
-
-    console.log(formData)
+   
+    // console.log(formData)
 
     return(
         <div>

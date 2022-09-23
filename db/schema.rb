@@ -21,9 +21,9 @@ ActiveRecord::Schema.define(version: 2022_09_19_212441) do
     t.string "category"
     t.string "brand"
     t.string "currency"
-    t.string "price"
+    t.integer "price"
     t.string "description"
-    t.string "image"
+    t.string "image_link"
     t.string "product_colors"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

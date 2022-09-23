@@ -7,10 +7,11 @@ import { Route } from 'react-router-dom';
 import { Switch } from 'react-router-dom';
 import { useState, useEffect } from "react";
 import MakeupContainer from './components/MakeupContainer';
-import DisplayReviews from './components/DisplayReviews'
 import SpecificItem from './components/SpecificItem';
 import NewReview from './components/NewReview';
 import { useParams } from "react-router-dom";
+import DisplayReviews from './components/DisplayReviews';
+import { Routes } from 'react-router-dom';
 
 
 
@@ -65,15 +66,20 @@ function App() {
     }, [])
 
   // add review
-  const addReview = (review) => setReviews(current => [...current,review])
-console.log(reviews)
+
+const addReview = (review) => setReviews(current => [...current,review])
+
+//  console.log(reviews)
+//  console.log(addReview)
+
+
   // add update 
   function onUpdateReview(updatedReview){
     const freshReview = reviews.map(review => review.id === updatedReview.id? updatedReview: review)
     setReviews(freshReview)
   }
   
-console.log(currentUser)
+// console.log(currentUser)
  
 
 
@@ -81,33 +87,14 @@ console.log(currentUser)
   return (
     <div>
       <Navbar/>
-        <Switch>
-          <Route exact path="/">
-            <Home/>
-          </Route>
-          <Route exact path="/signup">
-            <Signup setCurrentUser={setCurrentUser}/>
-          </Route>
-        <Route exact path="/login">
-            <Login 
-              setCurrentUser={setCurrentUser}
-            />
-        </Route>
-        <Route exact path="/makeup">
-            <MakeupContainer
-              makeups={makeup}
-            />
-        </Route>
-        <Route exact path="/makeup/:id">
-            <SpecificItem/>
-            <DisplayReviews/>
-          </Route>
-          <Route exact path="/review">
-            <NewReview
-            addReview={addReview}
-            />
-          </Route>
-        </Switch>
+      <Routes>
+          <Route path="/" element={<Home/>}/> 
+          <Route path="/signup" element={<Signup setCurrentUser={setCurrentUser}/>}/>
+          <Route path="/login" element={<Login setCurrentUser={setCurrentUser}/>} />
+          <Route path="/makeup" element={ <MakeupContainer makeups={makeup}/>}/>
+          <Route path="/makeup/:id" element={ <DisplayReviews addReview={addReview}/>}/>
+          <Route path="/review/new" element={<NewReview/>}/>
+      </Routes>
     </div>
   );
 }

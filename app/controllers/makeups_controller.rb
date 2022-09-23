@@ -27,12 +27,12 @@ class MakeupsController < ApplicationController
     def index
         response = RestClient.get("https://makeup-api.herokuapp.com/api/v1/products.json")
         render json: response.body
-        if Makeup.any?
-            return 
-        else 
-            res = JSON.parse(response)
-            res.each{|r| Makeup.create(id: r["id"], name: r["name"], category: r["category"], image: r["image_link"], product_type: r["product_type"], product_colors: r["product_colors"], brand: r["brand"], currency: r["currency"], price: r["price"], description: r["description"])}
-        end
+        # if Makeup.any?
+        #     return 
+        # else 
+        #     res = JSON.parse(response)
+        #     res.each{|r| Makeup.create(id: r["id"], name: r["name"], category: r["category"], image: r["image_link"], product_type: r["product_type"], product_colors: r["product_colors"], brand: r["brand"], currency: r["currency"], price: r["price"], description: r["description"])}
+        # end
     end
 
     private
