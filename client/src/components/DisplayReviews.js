@@ -7,6 +7,7 @@ import NewReview from "./NewReview";
 
 
 function DisplayReviews(){
+    
 
 
     let {id} = useParams();
@@ -23,8 +24,9 @@ function DisplayReviews(){
 			});
 	}, [id]);
 
+    // console.log(reviews)
   
-    const displayReviews = reviews.reviews.map((review)=>{
+    const displayReview = reviews.reviews.map((review)=>{
         return(
             <ReviewCard
             key={review.id}
@@ -43,7 +45,7 @@ function DisplayReviews(){
             </div>
           
          
-            {displayReviews}
+            {displayReview}
         </div>
     )
 }
