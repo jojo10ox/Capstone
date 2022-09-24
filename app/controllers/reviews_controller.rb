@@ -8,17 +8,20 @@ class ReviewsController < ApplicationController
 
     #POST '/reviews'
     def create
-        byebug
+        # byebug
         # reviews = Review.create!(review_params)
         # render json: reviews, status: :created
         user = current_user
         makeup= Makeup.find_or_create_by(makeup_params)
 
-    
-        review_user_id = user.id
-        review_makeup_id = makeup.id
-        new_review = Review.new(review_params)
-        new_review.save
+        review = Review.new(review_params)
+        review.user_id = user.id
+        review.makeup_id = makeup.id
+        review.save     
+        # review_user_id = user.id
+        # review_makeup_id = makeup.id
+        # new_review = Review.new(review_params)
+        # new_review.save
 
 
        

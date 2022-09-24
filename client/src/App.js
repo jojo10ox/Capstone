@@ -81,7 +81,7 @@ const addReview = (review) => setReviews(current => [...current,review])
   
 // console.log(currentUser)
  
-
+// console.log(makeup)
 
 
   return (
@@ -92,8 +92,8 @@ const addReview = (review) => setReviews(current => [...current,review])
           <Route path="/signup" element={<Signup setCurrentUser={setCurrentUser}/>}/>
           <Route path="/login" element={<Login setCurrentUser={setCurrentUser}/>} />
           <Route path="/makeup" element={ <MakeupContainer makeups={makeup}/>}/>
-          <Route path="/makeup/:id" element={ <DisplayReviews addReview={addReview}/>}/>
-          <Route path="/review/new" element={<NewReview/>}/>
+          <Route path="/makeup/:id" element={ <DisplayReviews addReview={addReview}/> }/>
+          <Route path="/review/new" element={<NewReview makeup={makeup}/>}/>
       </Routes>
     </div>
   );

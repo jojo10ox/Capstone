@@ -7,36 +7,38 @@ import { useSearchParams } from "react-router-dom";
 
 
 
-function DisplayReviews({addReview}){
+function DisplayReviews(){
+ 
     
     const [searchparams] = useSearchParams();
-    console.log(searchparams.get("id"))
+    // console.log(searchparams.get("id"))
 
     let {id} = useParams();
 
     const[reviews, setReviews] = useState({reviews: []})
+    // const [searchParams, setSearchParams] = useSearchParams()
+
+    // const searchTerm = searchParams.get("id")
   
      
-    useEffect(() => {
-		fetch(`/makeups/${id}`)
-			.then((res) => res.json())
-			.then((data) => {
-                // console.log(data)
-				setReviews(data);
-			});
-	}, [id]);
+    // useEffect(() => {
+	// 	fetch(`/makeups/${id}`)
+	// 		.then((res) => res.json())
+	// 		.then((data) => {
+    //             console.log(data)
+	// 			setReviews(data);
+	// 		});
+	// }, [id]);
 
     // console.log(reviews)
   
-    const displayReview = reviews.reviews.map((review)=>{
-        return(
-            <ReviewCard
-            key={review.id}
-            review={review}
-            />
-       
-            
-        )})
+    // const displayReview = reviews.reviews.map((review)=>{
+    //     return(
+    //         <ReviewCard
+    //         key={review.id}
+    //         review={review}
+    //         />  
+    //     )})
     return(
         <div>
             {/* <Link to="/review"><button className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border rounded shadow">
@@ -47,7 +49,7 @@ function DisplayReviews({addReview}){
             </div>
           
          
-            {displayReview}
+            {/* {displayReview} */}
         </div>
     )
 }

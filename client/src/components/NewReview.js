@@ -1,37 +1,42 @@
 import { useEffect, useState } from "react";
 
-function NewReview({addReview, currentUserId, makeupId, reviews, setReviews, getDat}){
+function NewReview({addReview, currentUserId, makeupId, makeup}){
 //  console.log(reviews)
     const[formData, setFormData] = useState({
-        rating: "",
-        description_title: "",
-        description: "",
-        state: "",
+        // rating: "",
+        // description_title: "",
+        // description: "",
+        // state: "",
     })
     const[errors, setErrors] = useState([])
 
     function handleChange(e){ setFormData({...formData, [e.target.id] : e.target.value }) }
 
-  
+
+   
 
     function handleSubmit(e){
         e.preventDefault()
         e.target.reset()
 
-        const newReview = {
-            makeup_id: makeupId,
-            user_id: currentUserId,
-            rating: formData.rating,
-            description_title: formData.description_title,
-            description: formData.description,
-            state: formData.state
+        // const newReview = {
+        //     makeup_id: makeupId,
+        //     user_id: currentUserId,
+        //     rating: formData.rating,
+        //     description_title: formData.description_title,
+        //     description: formData.description,
+        //     state: formData.state
+        // }
+        const infoToSend = {
+            ...formData,
+            ...makeup
         }
        
        
         fetch('/reviews',{
           method:'POST',
           headers: {'Content-Type': 'application/json'},
-          body:JSON.stringify(newReview)
+          body:JSON.stringify(infoToSend)
         })
         .then(res => {
           if(res.ok){
