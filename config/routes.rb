@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   post "/login", to: "sessions#create"
   get '/signup', to: "users#create"
   delete "/logout", to: "sessions#destroy"
+
+  get '/all_makeup', to: "makeups#from_api"
   
   resources :reviews
   resources :users

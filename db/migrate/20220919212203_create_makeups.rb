@@ -9,7 +9,8 @@ class CreateMakeups < ActiveRecord::Migration[6.1]
       t.integer :price
       t.string :description
       t.string :image_link
-      t.string :product_colors
+
+
 
       t.timestamps
     end

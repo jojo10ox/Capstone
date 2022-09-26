@@ -1,16 +1,17 @@
 import MakeupCard from "./MakeupCard";
 
 
-function MakeupContainer({makeups}){
+function MakeupContainer({makeupsApi, setSendMakeup}){
 //  console.log(makeups)
 
 
 
-const displayMakeup = makeups.map((makeup)=>{
+const displayMakeup = makeupsApi.map((makeup)=>{
     return(
         <MakeupCard
         key={makeup.id}
         makeup={makeup}
+        setSendMakeup={setSendMakeup}
         />
     )
 

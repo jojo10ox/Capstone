@@ -13,18 +13,19 @@ class ReviewsController < ApplicationController
         # render json: reviews, status: :created
         user = current_user
         makeup= Makeup.find_or_create_by(makeup_params)
-
+      
         review = Review.new(review_params)
         review.user_id = user.id
         review.makeup_id = makeup.id
-        review.save     
+        # byebug
+        review.save
+        render json: review, status: :created    
+
+        # byebug
         # review_user_id = user.id
         # review_makeup_id = makeup.id
         # new_review = Review.new(review_params)
         # new_review.save
-
-
-       
     end
 
     #GET '/reviews/:id'
@@ -49,11 +50,11 @@ class ReviewsController < ApplicationController
     private
     def review_params
         params.permit( 
-            :user_id, 
+            :user_id,
             :makeup_id, 
             :rating, 
             :description_title, 
-            :description, 
+            :review_description, 
             :state
         )
         #:user_id, :makeup_id
@@ -62,16 +63,14 @@ class ReviewsController < ApplicationController
     def makeup_params
      
         params.permit(
-            :name, 
-            :category, 
+            :name,
+            :price,
+            :currency,
             :image_link, 
-            :product_type, 
-            :product_colors, 
-            :brand, 
-            :currency, 
-            :price, 
             :description, 
-            :currency
+            :category, 
+            :product_type, 
+            :brand
         )
     end
 

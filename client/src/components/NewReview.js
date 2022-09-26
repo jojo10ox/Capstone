@@ -1,37 +1,25 @@
 import { useEffect, useState } from "react";
 
-function NewReview({addReview, currentUserId, makeupId, makeup}){
-//  console.log(reviews)
-    const[formData, setFormData] = useState({
-        // rating: "",
-        // description_title: "",
-        // description: "",
-        // state: "",
-    })
+function NewReview({addReview, currentUserId, makeupId, makeup, sendMakeup}){
+
+    const[formData, setFormData] = useState({})
     const[errors, setErrors] = useState([])
 
     function handleChange(e){ setFormData({...formData, [e.target.id] : e.target.value }) }
 
-
+    console.log(sendMakeup)
    
 
     function handleSubmit(e){
         e.preventDefault()
-        e.target.reset()
+        // e.target.reset()
 
-        // const newReview = {
-        //     makeup_id: makeupId,
-        //     user_id: currentUserId,
-        //     rating: formData.rating,
-        //     description_title: formData.description_title,
-        //     description: formData.description,
-        //     state: formData.state
-        // }
         const infoToSend = {
             ...formData,
-            ...makeup
+            ...sendMakeup
         }
        
+        // console.log(infoToSend)
        
         fetch('/reviews',{
           method:'POST',
@@ -50,8 +38,8 @@ function NewReview({addReview, currentUserId, makeupId, makeup}){
         })
       }
 
-   
-    // console.log(formData)
+
+ console.log(formData)
 
     return(
         <div>
@@ -65,10 +53,10 @@ function NewReview({addReview, currentUserId, makeupId, makeup}){
                         {/* <p className="text-red-500 text-xs italic">Please fill out this field.</p> */}
                     </div>
                     <div className="w-full md:w-1/2 px-3">
-                        <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="description">
-                        Description
+                        <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="review_description">
+                        Description Review
                         </label>
-                        <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="description" type="text" placeholder="Please enter a description."  onChange={handleChange}/>
+                        <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="review_description" type="text" placeholder="Please enter a description."  onChange={handleChange}/>
                     </div>
                 </div>
                 <div className="flex flex-wrap -mx-3 mb-2">

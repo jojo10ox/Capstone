@@ -24,15 +24,12 @@ ActiveRecord::Schema.define(version: 2022_09_19_212441) do
     t.integer "price"
     t.string "description"
     t.string "image_link"
-    t.string "product_colors"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "reviews", force: :cascade do |t|
     t.integer "rating"
     t.string "description_title"
-    t.string "description"
+    t.string "review_description"
     t.string "state"
     t.bigint "user_id", null: false
     t.bigint "makeup_id", null: false
