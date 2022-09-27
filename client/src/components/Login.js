@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useState} from "react";
+import { useNavigate } from "react-router-dom";
 
 function Login({setCurrentUser}) {
 
    const[errors, setErrors] = useState([])
+   const history = useNavigate()
 
     const [formData, setFormData] = useState({
         username: "",
@@ -19,6 +21,7 @@ function Login({setCurrentUser}) {
 
     function handleSubmit(e){
         e.preventDefault()
+        e.target.reset()
        
 
         fetch("/login", {
@@ -30,14 +33,17 @@ function Login({setCurrentUser}) {
           }).then((res) => {
             if (res.ok) {
               res.json().then((user) => {
-                setCurrentUser(user);
+                setCurrentUser(user)
+                history("/");
               });
             } else {
               res.json().then((json) => setErrors(json.errors));
             }
           });
-          e.target.reset()
+      
         };
+
+        
 
     // const handleLogout = () => {
     //   fetch('/logout', {method: "DELETE"})

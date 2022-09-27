@@ -1,12 +1,15 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+
 
 function Navbar({currentUser, setCurrentUser}){
+    const history = useNavigate()
 
     const handleLogout = () => {
         fetch('/logout', {method: "DELETE"})
         .then(res => {
               if (res.ok) {
-                setCurrentUser(null)
+                setCurrentUser("")
+                history("/")
               }
             })
       }
@@ -17,9 +20,8 @@ function Navbar({currentUser, setCurrentUser}){
         <div className='w-screen h-[80px] z-10 sticky top-0 md:bg-zinc-200 sm:bg-zinc-200 drop-shadow-lg '>
                 <div className='px-2 flex justify-between items-center w-full h-full'>
                     <div className='flex items-center'>
-                        <h1 className='text-3xl font-bold mr-4 sm:text-4xl'>DoseOfBeauty</h1>
+                        <NavLink to="/"><h1 className='text-3xl font-bold mr-4 sm:text-4xl'>DoseOfBeauty</h1></NavLink>
                         <ul className=' flex justify-center md:flex'>
-                            <li><NavLink to="/makeup">Makeup</NavLink></li>
                             <li><NavLink to="/reviews">Reviews</NavLink></li>
                         </ul>
                     </div>

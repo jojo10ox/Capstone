@@ -1,14 +1,11 @@
-import { useParams, Link } from "react-router-dom";
-import { useState, useEffect } from "react";
-
 import ReviewCard from "./ReviewCard";
-import { useSearchParams } from "react-router-dom";
 
 
 
-function DisplayReviews({reviews, handleEdit, change, setChange,handleDelete, currentUser, editContactId, handleEditClick, onUpdateReview, handleCancelClick, deleteReview}){
 
+function DisplayReviews({reviews, handleEdit, change, setChange,handleDelete, currentUser, editContactId, handleEditClick, onUpdateReview, handleCancelClick, savedMakeup, deleteReview}){
 
+console.log(savedMakeup)
   
     const displayReview = reviews.map((review)=>{
         return(
@@ -28,7 +25,7 @@ function DisplayReviews({reviews, handleEdit, change, setChange,handleDelete, cu
             />  
         )})
     return(
-        <div>
+        <div className="grid lg:grid-cols-5 md:grid-cols-3 gap-y-5 gap-x-9 p-4">
             {displayReview}
         </div>
     )

@@ -75,7 +75,7 @@ console.log(reviews)
 
     }
 
-
+console.log(savedMakeup)
     
     useEffect(() => {getSavedMakeup()}, [])
 
@@ -132,7 +132,7 @@ const deleteReview = (id) => setReviews(current => current.filter(r => r.id !== 
           {/* <Route path="/reviews" element={<ReviewedMakeup reviews={reviews}/>}/>  */}
           <Route path="/signup" element={<Signup setCurrentUser={setCurrentUser}/>}/>
           <Route path="/login" element={<Login setCurrentUser={setCurrentUser}/>} />
-          <Route path="/makeup" element={ <MakeupContainer makeupsApi={makeupApi} setSendMakeup={setSendMakeup} currentUser={currentUser}/>}/>
+          <Route path="/" element={ <MakeupContainer makeupsApi={makeupApi} setSendMakeup={setSendMakeup} currentUser={currentUser}/>}/>
           <Route path="/reviews" element={ 
             <DisplayReviews 
             change={change}
@@ -147,6 +147,7 @@ const deleteReview = (id) => setReviews(current => current.filter(r => r.id !== 
               handleEdit={handleEdit}
               handleDelete={handleDelete}
               setChange={setChange}
+              savedMakeup={savedMakeup}
               /> 
               }/>
           <Route path="/review/new" element={<NewReview makeup={makeupApi} sendMakeup={sendMakeup} currentUser={currentUser} getReviews={getReviews} change={change} setChange={setChange}/>}/>
