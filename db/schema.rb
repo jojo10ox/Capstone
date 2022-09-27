@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 2022_09_19_212441) do
     t.string "currency"
     t.integer "price"
     t.string "description"
-    t.string "image_link"
+    t.string "api_featured_image"
   end
 
   create_table "reviews", force: :cascade do |t|

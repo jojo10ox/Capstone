@@ -51,7 +51,7 @@ class ReviewsController < ApplicationController
     def review_params
         params.permit( 
             :user_id,
-            :makeup_id, 
+            # :makeup_id, 
             :rating, 
             :description_title, 
             :review_description, 
@@ -66,7 +66,7 @@ class ReviewsController < ApplicationController
             :name,
             :price,
             :currency,
-            :image_link, 
+            :api_featured_image, 
             :description, 
             :category, 
             :product_type, 

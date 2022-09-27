@@ -19,7 +19,7 @@ function Login({setCurrentUser}) {
 
     function handleSubmit(e){
         e.preventDefault()
-        e.target.reset()
+       
 
         fetch("/login", {
             method: "POST",
@@ -36,16 +36,17 @@ function Login({setCurrentUser}) {
               res.json().then((json) => setErrors(json.errors));
             }
           });
+          e.target.reset()
         };
 
-    const handleLogout = () => {
-      fetch('/logout', {method: "DELETE"})
-      .then(res => {
-            if (res.ok) {
-              setCurrentUser(null)
-            }
-          })
-    }
+    // const handleLogout = () => {
+    //   fetch('/logout', {method: "DELETE"})
+    //   .then(res => {
+    //         if (res.ok) {
+    //           setCurrentUser(null)
+    //         }
+    //       })
+    // }
     
 
     return(
@@ -72,7 +73,7 @@ function Login({setCurrentUser}) {
             </form>
         </div>
         <div>
-            <button onClick={handleLogout}>Logout</button>
+            {/* <button onClick={handleLogout}>Logout</button> */}
         </div>
         {errors ? <div>{errors}</div> : null}
       </div>

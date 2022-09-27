@@ -6,7 +6,6 @@ import { Route } from 'react-router-dom';
 import { Switch } from 'react-router-dom';
 import { useState, useEffect } from "react";
 import MakeupContainer from './components/MakeupContainer';
-import SpecificItem from './components/SpecificItem';
 import NewReview from './components/NewReview';
 import { useParams } from "react-router-dom";
 import DisplayReviews from './components/DisplayReviews';
@@ -25,8 +24,10 @@ function App() {
   const [reviews, setReviews] = useState([])
   const [errors, setErrors] = useState(false)
   const [sendMakeup, setSendMakeup] = useState({})
+  const [savedMakeup, setSavedMakeup] = useState([])
+  const [change, setChange] = useState(false);
 
-  console.log(sendMakeup)
+console.log(reviews)
 
   useEffect(() => {
     fetch('/all_makeup').then(res => {
@@ -65,11 +66,38 @@ function App() {
       });
       }
     });
-    }, [])
+    }, [change])
+
+    const getSavedMakeup = () => {
+      fetch('/makeups')
+      .then(res=>res.json())
+      .then(data=>setSavedMakeup(data))
+
+    }
+
+
+    
+    useEffect(() => {getSavedMakeup()}, [])
+
+
+    const handleEdit = () => {
+      getSavedMakeup()
+    }
+
+    //handle delete 
+    const handleDelete = () => {
+      getSavedMakeup();
+    };
+
 
 // add review
 const addReview = (review) => setReviews(current => [...current,review])
 
+const getReviews = () => {
+  fetch(`/reviews`)
+  .then(res=>res.json())
+  .then(data => setReviews(data))
+}
 //  console.log(reviews)
 //  console.log(addReview)
 
@@ -84,6 +112,8 @@ const handleCancelClick = () => {
   setEditContactId(null);
 };
 
+
+
 // add update 
 const onUpdateReview = (review) => setReviews(current => [...current,review])
 
@@ -97,14 +127,15 @@ const deleteReview = (id) => setReviews(current => current.filter(r => r.id !== 
 
   return (
     <div>
-      <Navbar currentUser={currentUser}/>
+      <Navbar currentUser={currentUser} setCurrentUser={setCurrentUser}/>
       <Routes>
           {/* <Route path="/reviews" element={<ReviewedMakeup reviews={reviews}/>}/>  */}
           <Route path="/signup" element={<Signup setCurrentUser={setCurrentUser}/>}/>
           <Route path="/login" element={<Login setCurrentUser={setCurrentUser}/>} />
-          <Route path="/makeup" element={ <MakeupContainer makeupsApi={makeupApi} setSendMakeup={setSendMakeup}/>}/>
+          <Route path="/makeup" element={ <MakeupContainer makeupsApi={makeupApi} setSendMakeup={setSendMakeup} currentUser={currentUser}/>}/>
           <Route path="/reviews" element={ 
             <DisplayReviews 
+            change={change}
               reviews={reviews}
               addReview={addReview} 
               currentUser={currentUser} 
@@ -112,8 +143,13 @@ const deleteReview = (id) => setReviews(current => current.filter(r => r.id !== 
               handleEditClick={handleEditClick} 
               onUpdateReview={onUpdateReview} 
               handleCancelClick={handleCancelClick} 
-              deleteReview={deleteReview}/> }/>
-          <Route path="/review/new" element={<NewReview makeup={makeupApi} sendMakeup={sendMakeup}/>}/>
+              deleteReview={deleteReview}
+              handleEdit={handleEdit}
+              handleDelete={handleDelete}
+              setChange={setChange}
+              /> 
+              }/>
+          <Route path="/review/new" element={<NewReview makeup={makeupApi} sendMakeup={sendMakeup} currentUser={currentUser} getReviews={getReviews} change={change} setChange={setChange}/>}/>
       </Routes>
     </div>
   );

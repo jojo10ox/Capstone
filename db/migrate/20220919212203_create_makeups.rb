@@ -8,7 +8,7 @@ class CreateMakeups < ActiveRecord::Migration[6.1]
       t.string :currency
       t.integer :price
       t.string :description
-      t.string :image_link
+      t.string :api_featured_image
 
 
 

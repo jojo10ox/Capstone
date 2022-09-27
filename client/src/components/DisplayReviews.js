@@ -6,8 +6,9 @@ import { useSearchParams } from "react-router-dom";
 
 
 
-function DisplayReviews({reviews, currentUser, editContactId, handleEditClick, onUpdateReview, handleCancelClick, deleteReview}){
- 
+function DisplayReviews({reviews, handleEdit, change, setChange,handleDelete, currentUser, editContactId, handleEditClick, onUpdateReview, handleCancelClick, deleteReview}){
+
+
   
     const displayReview = reviews.map((review)=>{
         return(
@@ -20,6 +21,10 @@ function DisplayReviews({reviews, currentUser, editContactId, handleEditClick, o
             onUpdateReview={onUpdateReview}
             handleCancelClick={handleCancelClick}
             deleteReview={deleteReview}
+            handleEdit={handleEdit}
+            handleDelete={handleDelete}
+            change={change}
+            setChange={setChange}
             />  
         )})
     return(

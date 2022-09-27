@@ -1,10 +1,9 @@
 import { Link, createSearchParams, useNavigate } from "react-router-dom";
-import SpecificItem from "./SpecificItem";
 import { useSearchParams } from "react-router-dom";
 
 
 
-function MakeupCard({makeup, setSendMakeup}){
+function MakeupCard({makeup, setSendMakeup, currentUser}){
   
     // console.log(makeup)
 
@@ -39,7 +38,7 @@ function MakeupCard({makeup, setSendMakeup}){
              
                 {/* {makeup.description} */}
                 <h1>{makeup.price==="0.0"? (null):(makeup.price)}</h1>
-                <Link to={"/review/new"} onClick={onReviewClick}>Write a Review</Link>
+                <Link to={"/review/new"} onClick={onReviewClick}>Write a Review</Link> 
                 {/* ${makeup.price} */}
                 {/* {makeup.product_colors} */}
                

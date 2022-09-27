@@ -1,7 +1,7 @@
 import MakeupCard from "./MakeupCard";
 
 
-function MakeupContainer({makeupsApi, setSendMakeup}){
+function MakeupContainer({makeupsApi, setSendMakeup, currentUser}){
 //  console.log(makeups)
 
 
@@ -12,6 +12,7 @@ const displayMakeup = makeupsApi.map((makeup)=>{
         key={makeup.id}
         makeup={makeup}
         setSendMakeup={setSendMakeup}
+        currentUser={currentUser}
         />
     )
 

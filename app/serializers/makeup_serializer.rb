@@ -2,7 +2,7 @@ class MakeupSerializer < ActiveModel::Serializer
   attributes :id, :name,
   :price,
   :currency,
-  :image_link, 
+  :api_featured_image, 
   :description, 
   :category, 
   :product_type, 
