@@ -6,10 +6,11 @@ class CreateMakeups < ActiveRecord::Migration[6.1]
       t.string :category
       t.string :brand
       t.string :currency
-      t.integer :string
+      t.integer :price
       t.string :description
-      t.string :image
-      t.string :product_colors
+      t.string :api_featured_image
+
+
 
       t.timestamps
     end

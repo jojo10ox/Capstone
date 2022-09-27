@@ -1,50 +1,31 @@
-import { useParams, Link } from "react-router-dom";
-import { useState, useEffect } from "react";
-
 import ReviewCard from "./ReviewCard";
-import NewReview from "./NewReview";
 
 
 
-function DisplayReviews(){
-    
 
+function DisplayReviews({reviews, handleEdit, change, setChange,handleDelete, currentUser, editContactId, handleEditClick, onUpdateReview, handleCancelClick, savedMakeup, deleteReview}){
 
-    let {id} = useParams();
-
-    const[reviews, setReviews] = useState({reviews: []})
+console.log(savedMakeup)
   
-     
-    useEffect(() => {
-		fetch(`/makeups/${id}`)
-			.then((res) => res.json())
-			.then((data) => {
-                console.log(data)
-				setReviews(data);
-			});
-	}, [id]);
-
-    // console.log(reviews)
-  
-    const displayReview = reviews.reviews.map((review)=>{
+    const displayReview = reviews.map((review)=>{
         return(
             <ReviewCard
             key={review.id}
             review={review}
-            />
-       
-            
+            currentUser={currentUser}
+            editContactId={editContactId}
+            handleEditClick={handleEditClick}
+            onUpdateReview={onUpdateReview}
+            handleCancelClick={handleCancelClick}
+            deleteReview={deleteReview}
+            handleEdit={handleEdit}
+            handleDelete={handleDelete}
+            change={change}
+            setChange={setChange}
+            />  
         )})
     return(
-        <div>
-            {/* <Link to="/review"><button className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border rounded shadow">
-               Write a Review
-            </button></Link> */}
-            <div>
-            <NewReview makeupId={reviews.makeup_id} currentUserId={reviews.user_id}/>
-            </div>
-          
-         
+        <div className="grid lg:grid-cols-5 md:grid-cols-3 gap-y-5 gap-x-9 p-4">
             {displayReview}
         </div>
     )

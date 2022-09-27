@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useState} from "react";
+import { useNavigate } from "react-router-dom";
 
 function Login({setCurrentUser}) {
 
    const[errors, setErrors] = useState([])
+   const history = useNavigate()
 
     const [formData, setFormData] = useState({
         username: "",
@@ -20,6 +22,7 @@ function Login({setCurrentUser}) {
     function handleSubmit(e){
         e.preventDefault()
         e.target.reset()
+       
 
         fetch("/login", {
             method: "POST",
@@ -30,22 +33,26 @@ function Login({setCurrentUser}) {
           }).then((res) => {
             if (res.ok) {
               res.json().then((user) => {
-                setCurrentUser(user);
+                setCurrentUser(user)
+                history("/");
               });
             } else {
               res.json().then((json) => setErrors(json.errors));
             }
           });
+      
         };
 
-    const handleLogout = () => {
-      fetch('/logout', {method: "DELETE"})
-      .then(res => {
-            if (res.ok) {
-              setCurrentUser(null)
-            }
-          })
-    }
+        
+
+    // const handleLogout = () => {
+    //   fetch('/logout', {method: "DELETE"})
+    //   .then(res => {
+    //         if (res.ok) {
+    //           setCurrentUser(null)
+    //         }
+    //       })
+    // }
     
 
     return(
@@ -72,7 +79,7 @@ function Login({setCurrentUser}) {
             </form>
         </div>
         <div>
-            <button onClick={handleLogout}>Logout</button>
+            {/* <button onClick={handleLogout}>Logout</button> */}
         </div>
         {errors ? <div>{errors}</div> : null}
       </div>

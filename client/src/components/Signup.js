@@ -1,9 +1,11 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Signup({setCurrentUser}){
     
 
     const[errors, setErrors] = useState([])
+    const history = useNavigate()
 
     const [formData, setFormData] = useState({
         username: "",
@@ -34,7 +36,8 @@ function Signup({setCurrentUser}){
         }).then((res) => {
           if (res.ok) {
             res.json().then((user) => {
-              setCurrentUser(user);
+              setCurrentUser(user) 
+              history("/");
             });
           } else {
             res.json().then((json) => setErrors(json.errors));
