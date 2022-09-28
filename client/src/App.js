@@ -27,7 +27,7 @@ function App() {
   const [savedMakeup, setSavedMakeup] = useState([])
   const [change, setChange] = useState(false);
 
-console.log(reviews)
+
 
   useEffect(() => {
     fetch('/all_makeup').then(res => {
@@ -74,10 +74,8 @@ console.log(reviews)
       .then(data=>setSavedMakeup(data))
 
     }
-
-console.log(savedMakeup)
     
-    useEffect(() => {getSavedMakeup()}, [])
+    useEffect(() => {getSavedMakeup()}, [change])
 
 
     const handleEdit = () => {
@@ -90,40 +88,30 @@ console.log(savedMakeup)
     };
 
 
-// add review
-const addReview = (review) => setReviews(current => [...current,review])
+    // add review
+    const addReview = (review) => setReviews(current => [...current,review])
 
-const getReviews = () => {
-  fetch(`/reviews`)
-  .then(res=>res.json())
-  .then(data => setReviews(data))
-}
-//  console.log(reviews)
-//  console.log(addReview)
+    const getReviews = () => {
+      fetch(`/reviews`)
+      .then(res=>res.json())
+      .then(data => setReviews(data))
+    }
 
-//handle edit review click
-function handleEditClick(e, currentUser){
-  e.preventDefault()
-  setEditContactId(currentUser.id)
-}
 
-//handle edit cancel button
-const handleCancelClick = () => {
-  setEditContactId(null);
-};
+    //handle edit review click
+    function handleEditClick(e, currentUser){
+      e.preventDefault()
+      setEditContactId(currentUser.id)
+    }
 
 
 
-// add update 
-const onUpdateReview = (review) => setReviews(current => [...current,review])
+    // add update 
+    const onUpdateReview = (review) => setReviews(current => [...current,review])
 
 
-const deleteReview = (id) => setReviews(current => current.filter(r => r.id !== id)) 
+  const deleteReview = (id) => setReviews(current => current.filter(r => r.id !== id)) 
   
-// console.log(currentUser)
- 
-// console.log(makeup)
-
 
   return (
     <div>
@@ -135,16 +123,10 @@ const deleteReview = (id) => setReviews(current => current.filter(r => r.id !== 
           <Route path="/" element={ <MakeupContainer makeupsApi={makeupApi} setSendMakeup={setSendMakeup} currentUser={currentUser}/>}/>
           <Route path="/reviews" element={ 
             <DisplayReviews 
-            change={change}
+              change={change}
               reviews={reviews}
               addReview={addReview} 
               currentUser={currentUser} 
-              editContactId={editContactId} 
-              handleEditClick={handleEditClick} 
-              onUpdateReview={onUpdateReview} 
-              handleCancelClick={handleCancelClick} 
-              deleteReview={deleteReview}
-              handleEdit={handleEdit}
               handleDelete={handleDelete}
               setChange={setChange}
               savedMakeup={savedMakeup}

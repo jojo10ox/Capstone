@@ -48,7 +48,7 @@ function Signup({setCurrentUser}){
     return(
         <form onSubmit={handleSubmit}>
         <label htmlFor="username">Username:</label>
-        <input
+        <input className="text-black border"
           id="username-signup-input"
           type="text"
           name="username"
@@ -56,7 +56,7 @@ function Signup({setCurrentUser}){
           onChange={handleChange}
         />
         <label htmlFor="email">Email:</label>
-        <input
+        <input className="text-black border"
           id="email-signup-input"
           type="text"
           name="email"
@@ -64,14 +64,14 @@ function Signup({setCurrentUser}){
           onChange={handleChange}
         />
         <label htmlFor="password">Password:</label>
-        <input
+        <input className="text-black border"
           id="password-signup-input"
           type="password"
           name="password"
           value={formData.password}
           onChange={handleChange}
         />
-        <button type="submit">Submit</button>
+        <button type="submit" className="px-2 py-1 text-white border  bg-rose-500 hover:bg-transparent hover:text-rose-600 rounded-md">Submit</button>
         {errors ? <div>{errors}</div> : null}
       </form>
     );

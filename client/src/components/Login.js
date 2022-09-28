@@ -60,7 +60,7 @@ function Login({setCurrentUser}) {
         <div>
           <form onSubmit={handleSubmit}>
               <label htmlFor="username">Username:</label>
-              <input
+              <input className="text-black border"
                 id="username-input"
                 type="text"
                 name="username"
@@ -68,14 +68,14 @@ function Login({setCurrentUser}) {
                 onChange={handleChange}
               />
               <label htmlFor="password">Password:</label>
-              <input
+              <input className="text-black border"
                 id="password-input"
                 type="password"
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
               />
-              <button type="submit">Submit</button>
+              <button className="px-2 py-1 text-white border  bg-rose-500 hover:bg-transparent hover:text-rose-600 rounded-md" type="submit">Submit</button>
             </form>
         </div>
         <div>
