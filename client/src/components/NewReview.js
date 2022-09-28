@@ -8,8 +8,6 @@ function NewReview({addReview, change, setChange, sendMakeup, currentUser}){
     const history = useNavigate()
 
     function handleChange(e){ setFormData({...formData, [e.target.id] : e.target.value }) }
-
-//    console.log(sendMakeup)
    
 
     function handleSubmit(e){
@@ -21,7 +19,6 @@ function NewReview({addReview, change, setChange, sendMakeup, currentUser}){
             ...sendMakeup
         }
        
-        // console.log(infoToSend)
        
         fetch('/reviews',{
           method:'POST',
@@ -30,19 +27,13 @@ function NewReview({addReview, change, setChange, sendMakeup, currentUser}){
         })
         .then(res => {
           if(res.ok){
-            // res.json().then((review)=>setReviews([...reviews, review]))
             res.json().then((addReview), setChange(!change), history("/"))
-            // ((reviewss) => addReview(reviewss))
           } else {
-            //Display errors
             res.json().then((json) => setErrors(json.errors));
           }
         })
         e.target.reset()
-      }
-
-
- console.log(formData)
+    }
 
     return(
         <div>

@@ -29,9 +29,9 @@ function Navbar({currentUser, setCurrentUser}){
                  </div>
                     
                 <div className="flex pr-4 md:justify-end">
-                    <button className="border-none bg-transparent text-black mr-4"><NavLink to="/login">Sign In</NavLink></button>
-                    <button className="px-8 py-3"><NavLink to="/signup">Sign Up</NavLink></button>
-                    {currentUser? <button onClick={handleLogout} className="border-none bg-transparent text-black mr-4 px-4">Logout</button> : null}
+                    {currentUser? null : <button className="border-none bg-transparent text-black mr-4"><NavLink to="/login">Sign In</NavLink></button> }
+                    {currentUser? null : <button className="px-8 py-3"><NavLink to="/signup">Sign Up</NavLink></button>}
+                    {currentUser? <button onClick={handleLogout} className="px-8 py-3">Logout</button> : null}
                 </div>  
                {currentUser?  
                 <div className="inline-flex overflow-hidden relative justify-center items-center w-10 h-10 bg-gray-100 rounded-full dark:bg-gray-600">

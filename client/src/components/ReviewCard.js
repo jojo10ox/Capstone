@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 
-
+// currently not being used. leaving here just in case I may need it
 
 
 function ReviewCard({review, currentUser, handleDelete, change, setChange, savedMakeup, editContactId, handleEditClick, onUpdateReview, handleCancelClick, handleEdit, deleteReview}){
