@@ -20,7 +20,6 @@ function Signup({setCurrentUser}){
         });
     };
 
-
     function handleSubmit(e) {
         e.preventDefault();
         e.target.reset()
@@ -47,32 +46,32 @@ function Signup({setCurrentUser}){
 
     return(
         <form onSubmit={handleSubmit}>
-        <label htmlFor="username">Username:</label>
-        <input className="text-black border"
-          id="username-signup-input"
-          type="text"
-          name="username"
-          value={formData.username}
-          onChange={handleChange}
-        />
-        <label htmlFor="email">Email:</label>
-        <input className="text-black border"
-          id="email-signup-input"
-          type="text"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-        />
-        <label htmlFor="password">Password:</label>
-        <input className="text-black border"
-          id="password-signup-input"
-          type="password"
-          name="password"
-          value={formData.password}
-          onChange={handleChange}
-        />
-        <button type="submit" className="px-2 py-1 text-white border  bg-rose-500 hover:bg-transparent hover:text-rose-600 rounded-md">Submit</button>
-        {errors ? <div>{errors}</div> : null}
+          <label htmlFor="username">Username:</label>
+          <input className="text-black border"
+            id="username-signup-input"
+            type="text"
+            name="username"
+            value={formData.username}
+            onChange={handleChange}
+          />
+          <label htmlFor="email">Email:</label>
+          <input className="text-black border"
+            id="email-signup-input"
+            type="text"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+          />
+          <label htmlFor="password">Password:</label>
+          <input className="text-black border"
+            id="password-signup-input"
+            type="password"
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+          />
+          <button type="submit" className="px-2 py-1 text-white border  bg-rose-500 hover:bg-transparent hover:text-rose-600 rounded-md">Submit</button>
+          {errors ? <div>{errors}</div> : null}
       </form>
     );
 }
