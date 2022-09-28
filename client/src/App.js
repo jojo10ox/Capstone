@@ -77,11 +77,6 @@ function App() {
     
     useEffect(() => {getSavedMakeup()}, [change])
 
-
-    const handleEdit = () => {
-      getSavedMakeup()
-    }
-
     //handle delete 
     const handleDelete = () => {
       getSavedMakeup();
@@ -91,11 +86,6 @@ function App() {
     // add review
     const addReview = (review) => setReviews(current => [...current,review])
 
-    const getReviews = () => {
-      fetch(`/reviews`)
-      .then(res=>res.json())
-      .then(data => setReviews(data))
-    }
 
 
     //handle edit review click
@@ -110,7 +100,7 @@ function App() {
     const onUpdateReview = (review) => setReviews(current => [...current,review])
 
 
-  const deleteReview = (id) => setReviews(current => current.filter(r => r.id !== id)) 
+    const deleteReview = (id) => setReviews(current => current.filter(r => r.id !== id)) 
   
 
   return (
@@ -132,7 +122,7 @@ function App() {
               savedMakeup={savedMakeup}
               /> 
               }/>
-          <Route path="/review/new" element={<NewReview makeup={makeupApi} sendMakeup={sendMakeup} currentUser={currentUser} getReviews={getReviews} change={change} setChange={setChange}/>}/>
+          <Route path="/review/new" element={<NewReview makeup={makeupApi} sendMakeup={sendMakeup} currentUser={currentUser} change={change} setChange={setChange}/>}/>
       </Routes>
     </div>
   );
