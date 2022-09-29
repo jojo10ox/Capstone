@@ -34,10 +34,9 @@ function NewReview({addReview, change, setChange, sendMakeup, currentUser}){
         })
         e.target.reset()
     }
-
+// console.log(formData)
     return(
         <div>
-            {currentUser? 
             <form className="w-full max-w-lg" onSubmit={handleSubmit}> 
                 <div className="flex flex-wrap -mx-3 mb-6">
                     <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
@@ -69,7 +68,7 @@ function NewReview({addReview, change, setChange, sendMakeup, currentUser}){
                     </div>
                     <button>submit</button>
                 </div>
-            </form> : "Please sign in or sign up to create a review."}
+            </form> 
             {errors ? <div>{errors}</div> : null}
         </div>
 

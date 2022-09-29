@@ -1,5 +1,5 @@
 class ReviewsController < ApplicationController
-    skip_before_action :authenticate_user
+#  skip_before_action :authenticate_user
 
     #GET '/reviews'
     def index
@@ -17,7 +17,7 @@ class ReviewsController < ApplicationController
         review.save
         render json: review, status: :created   
         
-  
+   
         # reviews = Review.create!(review_params)
         # render json: reviews, status: :created
 
@@ -25,11 +25,6 @@ class ReviewsController < ApplicationController
         # review_makeup_id = makeup.id
         # new_review = Review.new(review_params)
         # new_review.save
-    end
-
-    #GET '/reviews/:id'
-    def show
-        render json: review_id, status: :ok
     end
 
     #PATCH '/reviews/:id'
