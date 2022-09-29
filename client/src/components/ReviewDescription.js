@@ -2,15 +2,20 @@
 import EditReview from "./EditReview";
 
 function ReviewDescription({  makeupReviews, userReviews, makeupUser,currentUser, makeup, change, setChange, handleDelete}) {
-// console.log(userReviews)
 
    const reviewsDisplayed = makeupReviews.map((makeupReview)=> {
         return(
-            <div key={makeupReview.id} >
-                <h1>description title: {makeupReview.description_title}</h1>
-                <h1>description: {makeupReview.review_description}</h1>
-                <h1>state: {makeupReview.state}</h1>
-                <h1>rating: {makeupReview.rating} </h1>
+            <div key={makeupReview.id} className="border">
+                <div className="flex justify-between">
+                    <h1><b>{makeupReview.description_title}</b></h1>
+                    <h1 className="text-sm"><i>{makeupReview.state}</i></h1>
+
+                </div>
+             
+                <h1><em>{makeupReview.rating}/10</em></h1>
+                <h1>{makeupReview.review_description}</h1>
+               
+              
 
            
                 <EditReview
