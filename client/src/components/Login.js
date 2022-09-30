@@ -58,28 +58,25 @@ function Login({setCurrentUser}) {
     return(
       <div>
         <div>
-          <form onSubmit={handleSubmit}>
-              <label htmlFor="username">Username:</label>
-              <input className="text-black border"
-                id="username-input"
-                type="text"
-                name="username"
-                value={formData.username}
-                onChange={handleChange}
-              />
-              <label htmlFor="password">Password:</label>
-              <input className="text-black border"
-                id="password-input"
-                type="password"
-                name="password"
-                value={formData.password}
-                onChange={handleChange}
-              />
-              <button className="px-2 py-1 text-white border  bg-rose-500 hover:bg-transparent hover:text-rose-600 rounded-md" type="submit">Submit</button>
-            </form>
-        </div>
-        <div>
-            {/* <button onClick={handleLogout}>Logout</button> */}
+            <form onSubmit={handleSubmit}>
+                <label htmlFor="username">Username:</label>
+                <input className="text-black border"
+                  id="username-input"
+                  type="text"
+                  name="username"
+                  value={formData.username}
+                  onChange={handleChange}
+                />
+                <label htmlFor="password">Password:</label>
+                <input className="text-black border"
+                  id="password-input"
+                  type="password"
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                />
+                <button className="px-2 py-1 text-white border  bg-rose-500 hover:bg-transparent hover:text-rose-600 rounded-md" type="submit">Submit</button>
+              </form>
         </div>
         {errors ? <div>{errors}</div> : null}
       </div>

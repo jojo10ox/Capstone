@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link, createSearchParams, useNavigate } from "react-router-dom";
 import { useSearchParams } from "react-router-dom";
 
@@ -5,8 +6,12 @@ import { useSearchParams } from "react-router-dom";
 
 function MakeupCard({makeup, setSendMakeup, currentUser}){
   
+    const [showDescription, setShowDescription] = useState(false)
     // console.log(makeup)
-
+   
+    const toggleDescription = () => {
+        setShowDescription(showDescription => !showDescription)
+    }
     function onReviewClick() {
         setSendMakeup(makeup)
         }
@@ -24,6 +29,7 @@ function MakeupCard({makeup, setSendMakeup, currentUser}){
     //         }).toString()
     //     })
     // };
+   
 
     // console.log(makeup)
     return(
@@ -31,9 +37,12 @@ function MakeupCard({makeup, setSendMakeup, currentUser}){
             <div className="card p-4 text-sm">
                 <h1 className="product-title">{makeup.name}</h1>
                 <h3 className="product-description">{makeup.brand}</h3>
-                <img src={makeup.api_featured_image} alt='Makeup' className="w-full sm:h-48 object-cover"></img> 
+                <img src={makeup.api_featured_image} alt='Makeup' className="w-full sm:h-48 object-cover" onClick={toggleDescription}></img> 
                 <h1>{makeup.price==="0.0"? (null): <>${makeup.price}</> }</h1>
-               {currentUser?  <Link to={"/review/new"} onClick={onReviewClick}>Write a Review</Link> : "Please sign in to write a review." }
+             
+                {showDescription? <h1 className="">{makeup.description}</h1> : null}
+                {currentUser?  <Link to={"/review/new"} onClick={onReviewClick} className="text-white border  bg-rose-500
+    hover:bg-transparent hover:text-rose-600 rounded-md">Write a Review</Link> : "Please sign in to write a review." }
             </div>
         </div>
     )
