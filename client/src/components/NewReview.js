@@ -35,42 +35,51 @@ function NewReview({addReview, change, setChange, sendMakeup, currentUser}){
         e.target.reset()
     }
 // console.log(formData)
-    return(
-        <div>
-            <form className="w-full max-w-lg" onSubmit={handleSubmit}> 
-                <div className="flex flex-wrap -mx-3 mb-6">
-                    <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                        <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="description_title">
-                        Description Title
-                        </label>
-                        <input className="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" name="description_title" type="text" placeholder="Please enter a title." required onChange={handleChange}/>
-                        {/* <p className="text-red-500 text-xs italic">Please fill out this field.</p> */}
-                    </div>
-                    <div className="w-full md:w-1/2 px-3">
-                        <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="review_description">
-                        Description Review
-                        </label>
-                        <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="review_description" type="text" placeholder="Please enter a description."  onChange={handleChange}/>
-                    </div>
+return(
+    <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md  grid place-items-center h-screen ">
+        <form className="bg-white py-8 px-6 shadow rounded-lg sm:px-10 " onSubmit={handleSubmit}> 
+            <h1 className="block uppercase tracking-wide text-black text-s font-bold mb-5" >Write a Review</h1>
+            <div className="flex flex-wrap -mx-3 mb-6">
+                <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="description_title">
+                    Description Title
+                    </label>
+                    <input className="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" name="description_title" type="text" placeholder="Please enter a title." required onChange={handleChange}/>
+                    {/* <p className="text-red-500 text-xs italic">Please fill out this field.</p> */}
                 </div>
-                <div className="flex flex-wrap -mx-3 mb-2">
-                    <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                        <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="rating">
-                        Rating
-                        </label>
-                        <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="rating" type="number" placeholder="10" min="0" max="10" onChange={handleChange}/>
-                    </div>
-                    <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                        <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="state" >
-                        State
-                        </label>
-                        <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="state" type="text" placeholder="Texas"  onChange={handleChange}/>
-                    </div>
-                    <button>submit</button>
+                <div className="w-full md:w-1/2 px-3">
+                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="review_description">
+                    Description Review
+                    </label>
+                    <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="review_description" type="text" placeholder="Please enter a description."  onChange={handleChange}/>
                 </div>
-            </form> 
-            {errors ? <div>{errors}</div> : null}
-        </div>
+            </div>
+            <div className="flex flex-wrap -mx-3 mb-2">
+                <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="rating">
+                    Rating
+                    </label>
+                    <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="rating" type="number" placeholder="10" min="0" max="10" onChange={handleChange}/>
+                </div>
+                <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="state" >
+                    State
+                    </label>
+                    <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="state" type="text" placeholder="Texas"  onChange={handleChange}/>
+                </div>
+                <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                    <label className="block uppercase tracking-wide text-white text-xs font-bold mb-2" htmlFor="state" >
+                    Submit
+                    </label>
+                    <button className="block w-full border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">submit</button>
+                </div>
+                
+            </div>
+        </form> 
+        {errors ? <div>{errors}</div> : null}
+    </div>
+
+
 
     )
 }
