@@ -66,7 +66,7 @@ function App() {
       });
       }
     });
-    }, [change])
+    }, [])
 
     const getSavedMakeup = () => {
       fetch('/makeups')
@@ -75,32 +75,41 @@ function App() {
 
     }
     
-    useEffect(() => {getSavedMakeup()}, [change])
+    useEffect(() => {getSavedMakeup()}, [])
 
-    //handle delete 
-    const handleDelete = () => {
-      getSavedMakeup();
-    };
-
-
-    // add review
-    const addReview = (review) => setReviews(current => [...current,review])
-
-
-
-    //handle edit review click
-    function handleEditClick(e, currentUser){
-      e.preventDefault()
-      setEditContactId(currentUser.id)
+    //add review to new makeup
+    const handleFirstReview = (newMakeup) => {
+      setSavedMakeup(makeup => [...makeup, newMakeup])
     }
 
+    // add review
+    const addReview = (newReview, makeupId) => {
+      const copyOfMakeup = [...savedMakeup]
+      const makeup_index = copyOfMakeup.findIndex((makeupObj) => makeupObj.id === makeupId)
+      copyOfMakeup[makeup_index].reviews = [...copyOfMakeup[makeup_index].reviews, newReview]
+      setSavedMakeup(copyOfMakeup)
+      // setSavedMakeup([...savedMakeup, newReview])
+    
+    }
 
+    //delete review
+    const deleteReview = (reviewToDelete, makeupId) => {
+      const copyOfMakeup = [...savedMakeup]
+      const makeup_index = copyOfMakeup.findIndex((makeupObj) => makeupObj.id === makeupId)
+      copyOfMakeup[makeup_index].reviews = copyOfMakeup[makeup_index].reviews?.filter(review => review.id !== reviewToDelete.id)
+      setSavedMakeup(copyOfMakeup)
+    }
+ 
+     
 
-    // add update 
-    const onUpdateReview = (review) => setReviews(current => [...current,review])
+    const handlePatch = (updatedReview, makeupId) => {
+      const copyOfMakeup = [...savedMakeup]
+      const makeup_index = copyOfMakeup.findIndex((makeupObj) => makeupObj.id === makeupId)
+      copyOfMakeup[makeup_index].reviews = copyOfMakeup[makeup_index].reviews?.map((review) =>
+      review.id === updatedReview.id ? updatedReview : review)
+      setSavedMakeup(copyOfMakeup)
+    }
 
-
-    const deleteReview = (id) => setReviews(current => current.filter(r => r.id !== id)) 
   
 
   return (
@@ -117,12 +126,15 @@ function App() {
               reviews={reviews}
               addReview={addReview} 
               currentUser={currentUser} 
-              handleDelete={handleDelete}
               setChange={setChange}
               savedMakeup={savedMakeup}
+              handlePatch={handlePatch}
+              deleteReview={deleteReview}
+          
+
               /> 
               }/>
-          <Route path="/review/new" element={<NewReview makeup={makeupApi} sendMakeup={sendMakeup} currentUser={currentUser} change={change} setChange={setChange}/>}/>
+          <Route path="/review/new" element={<NewReview handleFirstReview={handleFirstReview} makeup={makeupApi} sendMakeup={sendMakeup} currentUser={currentUser} change={change} setChange={setChange}/>}/>
       </Routes>
     </div>
   );

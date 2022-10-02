@@ -1,7 +1,7 @@
 import { useState } from "react"
 
-function EditReview({makeupReview, makeupUser,rev, userReviews, makeup, currentUser, change, setChange, handleDelete}){
-// console.log(makeupReview)
+function EditReview({makeupReview, deleteReview, handlePatch, makeupUser,rev, userReviews, makeup, currentUser, change, setChange}){
+
 
     const {rating, description_title, review_description, state } = makeupReview
     const [ratingUpdate, setRatingUpdate] = useState(rating)
@@ -31,32 +31,49 @@ function EditReview({makeupReview, makeupUser,rev, userReviews, makeup, currentU
             state: stateUpdate
         };
 
-        console.log(formData)
+        // console.log(formData)
 
         fetch(`/reviews/${makeupReview.id}`, {
             method: "PATCH",
             headers: {"Content-type": "application/json"},
-            body: JSON.stringify(formData),
-        }).then((res) => {
-            if (res.ok) {
-                res.json().then(setChange(!change))
-            } else {
-                res.json().then((errors) => setErrors(errors.errors));
-            }
-        });
+            body: JSON.stringify(formData)
+        })
+        .then((resp) => resp.json())
+        .then(review => {
+             handlePatch(review, review.makeup.id)
+        })
+
+        // .then((res) => {
+        //     if (res.ok) {
+        //         res.json().then(setChange(!change))
+        //     } else {
+        //         res.json().then((errors) => setErrors(errors.errors));
+        //     }
+        // });
     }
 
     function handleDelete() {
         fetch(`/reviews/${makeupReview.id}`, {
             method: "DELETE",
-        }).then((res) => {
-            if (res.ok) {
-                setChange(!change); // passed down from App
-            } else {
-                res.json().then((json) => setErrors(json.errors));
-            }
+        })
+        .then(res => res.json())
+        .then(review => {
+        // console.log(review.makeup.id) 
+         
+        deleteReview(review, review.makeup.id)
         });
     }
+
+// console.log(makeupReview)
+        
+        // .then((res) => {
+        //     if (res.ok) {
+        //         setChange(!change); // passed down from App
+        //     } else {
+        //         res.json().then((json) => setErrors(json.errors));
+        //     }
+        // });
+   
 
    
 // const test= userReviews.map((u, i)=>{

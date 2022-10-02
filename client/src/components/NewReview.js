@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-function NewReview({addReview, change, setChange, sendMakeup, currentUser}){
+function NewReview({addReview, handleFirstReview , change, setChange, sendMakeup, currentUser}){
 
     const[formData, setFormData] = useState({})
     const[errors, setErrors] = useState([])
@@ -20,21 +20,27 @@ function NewReview({addReview, change, setChange, sendMakeup, currentUser}){
         }
        
        
-        fetch('/reviews',{
+        fetch('/first_review',{
           method:'POST',
           headers: {'Content-Type': 'application/json'},
           body:JSON.stringify(infoToSend)
         })
-        .then(res => {
-          if(res.ok){
-            res.json().then((addReview), setChange(!change), history("/"))
-          } else {
-            res.json().then((json) => setErrors(json.errors));
-          }
+        .then(res=>res.json())
+        .then(review => {
+            handleFirstReview(review)
+            // console.log(review)
+            // addReview(review, review.makeup.id)
         })
+        // .then(res => {
+        //   if(res.ok){
+        //     res.json().then( setChange(!change), history("/"))
+        //   } else {
+        //     res.json().then((json) => setErrors(json.errors));
+        //   }
+        // })
         e.target.reset()
     }
-console.log(formData)
+// console.log(formData)
 
     return(
         <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md  grid place-items-center h-screen ">
