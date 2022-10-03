@@ -78,8 +78,8 @@ function App() {
     useEffect(() => {getSavedMakeup()}, [])
 
     //add review to new makeup
-    const handleFirstReview = (newMakeup) => {
-      setSavedMakeup(makeup => [...makeup, newMakeup])
+    const handleFirstReview = (newMakeup, name) => {
+      setSavedMakeup([...savedMakeup.filter(makeup => makeup.name !== name), newMakeup])
     }
 
     // add review

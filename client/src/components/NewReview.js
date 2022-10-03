@@ -19,6 +19,7 @@ function NewReview({addReview, handleFirstReview , change, setChange, sendMakeup
             ...sendMakeup
         }
        
+        const makeupName = sendMakeup.name
        
         fetch('/first_review',{
           method:'POST',
@@ -27,7 +28,7 @@ function NewReview({addReview, handleFirstReview , change, setChange, sendMakeup
         })
         .then(res=>res.json())
         .then(review => {
-            handleFirstReview(review)
+            handleFirstReview(review, makeupName)
             // console.log(review)
             // addReview(review, review.makeup.id)
         })
