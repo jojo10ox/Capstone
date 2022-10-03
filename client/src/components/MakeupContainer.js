@@ -4,9 +4,9 @@ import MakeupCard from "./MakeupCard";
 function MakeupContainer({makeupsApi, setSendMakeup, currentUser}){
 //  console.log(makeups)
 
+const limitedMakeup = makeupsApi.slice(0,100)
 
-
-const displayMakeup = makeupsApi.map((makeup)=>{
+const displayMakeup = limitedMakeup.map((makeup)=>{
     return(
         <MakeupCard
         key={makeup.id}

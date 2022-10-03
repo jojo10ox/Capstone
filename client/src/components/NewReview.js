@@ -43,6 +43,7 @@ function NewReview({addReview, handleFirstReview , change, setChange, sendMakeup
 // console.log(formData)
 
     return(
+        <div className="min-h-screen bg-slate-50 flex flex-col justify-center py-12 px-6 lg:px-8">
         <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md  grid place-items-center h-screen ">
             <form className="bg-white py-8 px-6 shadow rounded-lg sm:px-10 " onSubmit={handleSubmit}> 
                 <h1 className="block uppercase tracking-wide text-black text-s font-bold mb-5" >Write a Review</h1>
@@ -84,6 +85,7 @@ function NewReview({addReview, handleFirstReview , change, setChange, sendMakeup
                 </div>
             </form> 
             {errors ? <div>{errors}</div> : null}
+        </div>
         </div>
 
     )
