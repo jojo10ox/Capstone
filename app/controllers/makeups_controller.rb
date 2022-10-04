@@ -19,8 +19,7 @@ class MakeupsController < ApplicationController
         makeup = Makeup.find(params[:id])
         # render json: {reviews: makeup.reviews, makeup_id: makeup.id, user_id: current_user&.id},
 
-        render json: makeup, status: :ok
-        # , include: ['reviews', 'reviews.user']
+        render json: makeup, status: :ok, include: ['reviews', 'reviews.user']
         #, makeup_id: makeup.id, user_id: current_user.id
     end
 
@@ -28,7 +27,7 @@ class MakeupsController < ApplicationController
     #GET '/makeups'
     def index
         makeup = Makeup.all
-        render json: makeup, status: :ok
+        render json: makeup, status: :ok, include: ['reviews', 'reviews.user']
     end
 
     #GET '/all_makeup'

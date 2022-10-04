@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   delete "/logout", to: "sessions#destroy"
 
   get '/all_makeup', to: "makeups#from_api"
+  post 'first_review', to: 'reviews#first_review'
   
   resources :reviews
   resources :users
