@@ -3,13 +3,12 @@ import Login from './components/Login';
 import Signup from './components/Signup';
 import Navbar from './components/Navbar';
 import { Route } from 'react-router-dom';
-import { Switch } from 'react-router-dom';
 import { useState, useEffect } from "react";
 import MakeupContainer from './components/MakeupContainer';
 import NewReview from './components/NewReview';
-import { useParams } from "react-router-dom";
 import DisplayReviews from './components/DisplayReviews';
 import { Routes } from 'react-router-dom';
+import MakeupFilter from './components/MakeupFilter';
 
 
 
@@ -26,6 +25,7 @@ function App() {
   const [sendMakeup, setSendMakeup] = useState({})
   const [savedMakeup, setSavedMakeup] = useState([])
   const [change, setChange] = useState(false);
+  const [search, setSearch] = useState("")
 
 
 
@@ -110,16 +110,21 @@ function App() {
       setSavedMakeup(copyOfMakeup)
     }
 
-  
+    
+    const filteredMakeup = makeupApi.filter(makeup => makeup.name.toLowerCase().includes(search.toLowerCase()))
 
   return (
     <div>
-      <Navbar currentUser={currentUser} setCurrentUser={setCurrentUser}/>
+      <Navbar currentUser={currentUser} setCurrentUser={setCurrentUser} setSearch={setSearch}/>
       <Routes>
           {/* <Route path="/reviews" element={<ReviewedMakeup reviews={reviews}/>}/>  */}
           <Route path="/signup" element={<Signup setCurrentUser={setCurrentUser}/>}/>
           <Route path="/login" element={<Login setCurrentUser={setCurrentUser}/>} />
-          <Route path="/" element={ <MakeupContainer makeupsApi={makeupApi} setSendMakeup={setSendMakeup} currentUser={currentUser}/>}/>
+          <Route path="/" element={ 
+            <div>
+               <MakeupContainer makeupsApi={makeupApi} setSendMakeup={setSendMakeup} currentUser={currentUser}/>
+               {/* <MakeupFilter/> */}
+            </div>}/>
           <Route path="/reviews" element={ 
             <DisplayReviews 
               change={change}
@@ -130,7 +135,6 @@ function App() {
               savedMakeup={savedMakeup}
               handlePatch={handlePatch}
               deleteReview={deleteReview}
-          
 
               /> 
               }/>

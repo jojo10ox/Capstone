@@ -5,7 +5,7 @@ function DisplayReviews({reviews, change, handlePatch,  setChange, currentUser, 
 
     const displayReview = savedMakeup?.map((makeup)=>{
        return(
-           <div key={makeup.id}>
+           <div key={makeup.id} className="">
                <h1 className="product-title">{makeup.name}</h1>
                <h1 className="product-description">{makeup.brand}</h1>
                <img src={makeup.api_featured_image} alt="makeup"></img>

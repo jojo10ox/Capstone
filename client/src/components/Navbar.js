@@ -1,8 +1,14 @@
 import { NavLink, useNavigate } from "react-router-dom";
 
 
-function Navbar({currentUser, setCurrentUser}){
+function Navbar({currentUser, setCurrentUser, setSearch}){
     const history = useNavigate()
+
+    const onSearch = (e) => {
+        setSearch(e.target.value)
+    
+    }
+
 
     const handleLogout = () => {
         fetch('/logout', {method: "DELETE"})
@@ -41,7 +47,38 @@ function Navbar({currentUser, setCurrentUser}){
                             <button className="px-8 py-3"><NavLink to="/signup">Sign Up</NavLink></button>
                         </div>
                     }
-                    </div>       
+                    </div>  
+                    <div>
+
+{/* <div className="flex justify-center">
+  <div className="mb-3 xl:w-96">
+ 
+    <input
+      onChange={onSearch}
+      type="search"
+      className="
+        form-control
+        block
+        w-full
+        px-3
+        py-1.5
+        text-base
+        font-normal
+        text-gray-700
+        bg-white bg-clip-padding
+        border border-solid border-gray-300
+        rounded
+        transition
+        ease-in-out
+        m-0
+        focus:text-gray-700 focus:bg-white focus:border-rose-500 focus:outline-none
+      "
+      id="exampleSearch2"
+      placeholder="Search"
+    />
+  </div>
+</div> */}
+                    </div>     
             </div>
         
     )

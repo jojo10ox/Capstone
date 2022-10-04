@@ -29,6 +29,8 @@ function NewReview({addReview, handleFirstReview , change, setChange, sendMakeup
         .then(res=>res.json())
         .then(review => {
             handleFirstReview(review, makeupName)
+            history("/reviews")
+
             // console.log(review)
             // addReview(review, review.makeup.id)
         })
