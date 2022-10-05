@@ -110,19 +110,20 @@ function App() {
       setSavedMakeup(copyOfMakeup)
     }
 
-    
+
     const filteredMakeup = makeupApi.filter(makeup => makeup.name.toLowerCase().includes(search.toLowerCase()))
+  
 
   return (
     <div>
-      <Navbar currentUser={currentUser} setCurrentUser={setCurrentUser} setSearch={setSearch}/>
+      <Navbar currentUser={currentUser} setCurrentUser={setCurrentUser}/>
       <Routes>
           {/* <Route path="/reviews" element={<ReviewedMakeup reviews={reviews}/>}/>  */}
           <Route path="/signup" element={<Signup setCurrentUser={setCurrentUser}/>}/>
           <Route path="/login" element={<Login setCurrentUser={setCurrentUser}/>} />
           <Route path="/" element={ 
             <div>
-               <MakeupContainer makeupsApi={makeupApi} setSendMakeup={setSendMakeup} currentUser={currentUser}/>
+               <MakeupContainer makeupsApi={filteredMakeup} setSendMakeup={setSendMakeup} currentUser={currentUser} setSearch={setSearch}/>
                {/* <MakeupFilter/> */}
             </div>}/>
           <Route path="/reviews" element={ 

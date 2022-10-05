@@ -147,9 +147,12 @@ function EditReview({makeupReview, deleteReview, handlePatch, makeupUser,rev, us
             </div>
             <div>
  {showReview?  
-                    <form>
+                    <form className="bg-slate-100 py-4 px-6 shadow rounded-lg sm:px-10 space-y-2">
+                        <h1 className="tracking-wide text-black text-lg underline font-bold mb-5" >Edit Review</h1>
+                        <div className="">
+                            <h1><strong>Description Title</strong></h1>
                                 <div>
-                                    <input className="text-black border"
+                                    <input className="text-black border rounded-md"
                                     id="description_title" 
                                     type="text"
                                     placeholder="Please enter a title."
@@ -158,8 +161,11 @@ function EditReview({makeupReview, deleteReview, handlePatch, makeupUser,rev, us
                                     >
                                     </input>
                                 </div>
+                            </div>
+                            <div>
+                                <h1><strong>Rating</strong></h1>
                                 <div>
-                                    <input className="text-black border"
+                                    <input className="text-black border rounded-md "
                                     id="star"
                                     type="number"
                                     onChange={(e) => setRatingUpdate(e.target.value)}
@@ -167,8 +173,11 @@ function EditReview({makeupReview, deleteReview, handlePatch, makeupUser,rev, us
                                     >
                                     </input>
                                 </div>
+                            </div>
+                            <div>
+                                <h1><strong>Description</strong></h1>
                                 <div>
-                                    <input className="text-black border h-40"
+                                    <input className="text-black border h-20 rounded-md "
                                     id="description"
                                     type="text" 
                                     placeholder="Please enter a description."
@@ -177,8 +186,11 @@ function EditReview({makeupReview, deleteReview, handlePatch, makeupUser,rev, us
                                     >
                                     </input>
                                 </div>
+                            </div>
+                            <div>
+                                <h1><strong>State</strong></h1>
                                 <div>
-                                    <input className="text-black border"
+                                    <input className="text-black border rounded-md "
                                     id="state"
                                     type="text" 
                                     placeholder="Texas"
@@ -187,7 +199,8 @@ function EditReview({makeupReview, deleteReview, handlePatch, makeupUser,rev, us
                                     >
                                     </input>
                                 </div>
-                                <button onClick={updateReview}>save</button> 
+                            </div>
+                                <button className="w-20" onClick={updateReview}>save</button> 
                             </form> 
                         : null } 
                             {/* <button onClick={handleCancelClick}>cancel</button> */} 
