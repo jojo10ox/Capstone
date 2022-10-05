@@ -7,8 +7,8 @@ function ReviewDescription({  makeupReviews, handlePatch,  deleteReview, userRev
 
     // console.log(makeupReview)
         return(
-            <div key={makeupReview.id} className="border">
-                <div className="flex justify-between">
+            <div key={makeupReview.id} className="py-4 rounded-md">
+                <div className="flex justify-between ">
                     <h1><b>{makeupReview.description_title}</b></h1>
                     <h1 className="text-sm"><i>{makeupReview.state}</i></h1>
 

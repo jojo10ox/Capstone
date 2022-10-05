@@ -120,7 +120,7 @@ function EditReview({makeupReview, deleteReview, handlePatch, makeupUser,rev, us
 
     return(
         <div>
-            <div className="flex">
+            <div className="flex justify-between">
                 {currentUser.id ?  <button className="w-8 h-6" onClick={handleReviews}>Edit</button> :null}
                 {/* {test} */}
                 {/* {currentUser.id ?  
@@ -135,9 +135,10 @@ function EditReview({makeupReview, deleteReview, handlePatch, makeupUser,rev, us
                         // </svg> 
                 :null}  */}
                 {currentUser.id ?  
-                    <svg onClick={handleDelete} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
+                    // <svg onClick={handleDelete} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                    // <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    // </svg>
+                    <button className="bg-neutral-500" onClick={handleDelete}>Delete</button>
                 :null} 
                
 
@@ -147,7 +148,7 @@ function EditReview({makeupReview, deleteReview, handlePatch, makeupUser,rev, us
             </div>
             <div>
  {showReview?  
-                    <form className="bg-slate-100 py-4 px-6 shadow rounded-lg sm:px-10 space-y-2">
+                    <form className="bg-red-50 py-4 px-6 shadow rounded-lg sm:px-10 space-y-2">
                         <h1 className="tracking-wide text-black text-lg underline font-bold mb-5" >Edit Review</h1>
                         <div className="">
                             <h1><strong>Description Title</strong></h1>
