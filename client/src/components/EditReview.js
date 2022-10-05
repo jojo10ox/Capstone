@@ -3,8 +3,8 @@ import { useState } from "react"
 function EditReview({makeupReview, deleteReview, handlePatch, makeupUser,rev, userReviews, makeup, currentUser, change, setChange}){
 
 
-    const {rating, description_title, review_description, state } = makeupReview
-    const [ratingUpdate, setRatingUpdate] = useState(rating)
+    const {star, description_title, review_description, state } = makeupReview
+    const [ratingUpdate, setRatingUpdate] = useState(star)
     const [descriptionTitleUpdate, setdescriptionTitleUpdate] = useState(description_title)
     const [descriptionUpdate, setdescriptionUpdate] = useState(review_description)
     const [stateUpdate, setStateUpdate] = useState(state)
@@ -25,7 +25,7 @@ function EditReview({makeupReview, deleteReview, handlePatch, makeupUser,rev, us
         const formData = {
             makeup_id: makeup.id,
             user_id: currentUser.id,
-            rating: ratingUpdate,
+            star: ratingUpdate,
             description_title: descriptionTitleUpdate,
             review_description: descriptionUpdate,
             state: stateUpdate
@@ -160,7 +160,7 @@ function EditReview({makeupReview, deleteReview, handlePatch, makeupUser,rev, us
                                 </div>
                                 <div>
                                     <input className="text-black border"
-                                    id="rating"
+                                    id="star"
                                     type="number"
                                     onChange={(e) => setRatingUpdate(e.target.value)}
                                     value={ratingUpdate}

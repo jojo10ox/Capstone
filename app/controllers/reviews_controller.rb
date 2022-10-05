@@ -61,7 +61,7 @@ class ReviewsController < ApplicationController
 
     private
     def review_params
-        params.permit(:user_id, :rating, :description_title, :review_description, :state)
+        params.permit(:user_id, :star, :description_title, :review_description, :state)
     end
 
     def makeup_params

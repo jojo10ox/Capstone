@@ -4,6 +4,8 @@ import EditReview from "./EditReview";
 function ReviewDescription({  makeupReviews, handlePatch,  deleteReview, userReviews, makeupUser,currentUser, makeup, change, setChange}) {
 
    const reviewsDisplayed = makeupReviews?.map((makeupReview)=> {
+
+    // console.log(makeupReview)
         return(
             <div key={makeupReview.id} className="border">
                 <div className="flex justify-between">
@@ -12,7 +14,7 @@ function ReviewDescription({  makeupReviews, handlePatch,  deleteReview, userRev
 
                 </div>
              
-                <h1><em>{makeupReview.rating}/10</em></h1>
+                <h1><em>{makeupReview.star}/10</em></h1>
                 <h1>{makeupReview.review_description}</h1>
                
               

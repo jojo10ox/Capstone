@@ -7,7 +7,8 @@ function NewReview({addReview, handleFirstReview , change, setChange, sendMakeup
     const[errors, setErrors] = useState([])
     const history = useNavigate()
 
-    function handleChange(e){ setFormData({...formData, [e.target.name]: e.target.name === "rating" ? parseInt(e.target.value): (e.target.value) }) }
+    function handleChange(e){ setFormData({...formData, [e.target.name] : e.target.value }) }
+    //  function handleChange(e){ setFormData({...formData, [e.target.name]: e.target.name === "rating" ? parseInt(e.target.value): (e.target.value) }) }
    
 
     function handleSubmit(e){
@@ -43,7 +44,7 @@ function NewReview({addReview, handleFirstReview , change, setChange, sendMakeup
         // })
         e.target.reset()
     }
-// console.log(formData)
+//  console.log(formData)
 
     return(
         <div className="min-h-screen bg-slate-50 flex flex-col justify-center py-12 px-6 lg:px-8">
@@ -67,10 +68,10 @@ function NewReview({addReview, handleFirstReview , change, setChange, sendMakeup
                 </div>
                 <div className="flex flex-wrap -mx-3 mb-2">
                     <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                        <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="rating">
+                        <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="star" >
                         Rating
                         </label>
-                        <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="rating" type="number" placeholder="10" min="0" max="10" onChange={handleChange}/>
+                        <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="star" type="number" placeholder="10" required onChange={handleChange}/>
                     </div>
                     <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
                         <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="state" >
