@@ -1,5 +1,5 @@
 class ReviewsController < ApplicationController
-#  skip_before_action :authenticate_user
+#   skip_before_action :authenticate_user
 
     #GET '/reviews'
     def index
@@ -27,6 +27,12 @@ class ReviewsController < ApplicationController
         # new_review.save
     end
 
+    #GET '/reviews/:id'
+    def show
+        review = review_id
+        render json: review, status: :ok
+    end
+
     #PATCH '/reviews/:id'
     def update 
         reviews = review_id
@@ -37,13 +43,25 @@ class ReviewsController < ApplicationController
     #DELETE '/reviews/:id'
     def destroy
         reviews = review_id
+        copy = review_id
         reviews.destroy
-        head :no_content
+        render json: copy, status: :ok
+    end
+
+    def first_review
+        user = current_user
+        makeup = Makeup.find_or_create_by(makeup_params)
+        
+        review = Review.new(review_params)
+        review.user_id = user.id
+        review.makeup_id = makeup.id
+        review.save
+        render json: makeup , status: :created, include: ['reviews', 'reviews.user']
     end
 
     private
     def review_params
-        params.permit(:user_id, :rating, :description_title, :review_description, :state)
+        params.permit(:user_id, :star, :description_title, :review_description, :state)
     end
 
     def makeup_params

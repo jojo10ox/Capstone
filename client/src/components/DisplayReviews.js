@@ -1,11 +1,11 @@
 import ReviewDescription from "./ReviewDescription";
 
  
-function DisplayReviews({reviews, change, setChange,handleDelete, currentUser, savedMakeup}){
+function DisplayReviews({reviews, change, handlePatch,  setChange, currentUser, savedMakeup, addReview, deleteReview}){
 
-    const displayReview = savedMakeup.map((makeup)=>{
+    const displayReview = savedMakeup?.map((makeup)=>{
        return(
-           <div key={makeup.id}>
+           <div key={makeup.id} className="">
                <h1 className="product-title">{makeup.name}</h1>
                <h1 className="product-description">{makeup.brand}</h1>
                <img src={makeup.api_featured_image} alt="makeup"></img>
@@ -14,12 +14,15 @@ function DisplayReviews({reviews, change, setChange,handleDelete, currentUser, s
                     makeupReviews={makeup.reviews}
                     makeupUser={makeup.users}
                     currentUser={currentUser}
-                    handleDelete={handleDelete}
                     savedMakeup={savedMakeup}
                     makeup={makeup}
                     change={change}
                     setChange={setChange}
                     userReviews={reviews}
+                    deleteReview={deleteReview}
+                    handlePatch={handlePatch}
+             
+                  
                /> 
            </div>
              

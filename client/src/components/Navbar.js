@@ -1,8 +1,14 @@
 import { NavLink, useNavigate } from "react-router-dom";
 
 
-function Navbar({currentUser, setCurrentUser}){
+function Navbar({currentUser, setCurrentUser, setSearch}){
     const history = useNavigate()
+
+    const onSearch = (e) => {
+        setSearch(e.target.value)
+    
+    }
+
 
     const handleLogout = () => {
         fetch('/logout', {method: "DELETE"})
@@ -17,7 +23,7 @@ function Navbar({currentUser, setCurrentUser}){
 
 
     return(
-        <div>
+      
             <div className='w-screen h-[80px] z-10 sticky top-0 md:bg-zinc-200 sm:bg-zinc-200 drop-shadow-lg '>
                     <div className='px-2 flex justify-between items-center w-full h-full'>
                         <div className='flex items-center'>
@@ -36,14 +42,47 @@ function Navbar({currentUser, setCurrentUser}){
                                 <button onClick={handleLogout} className="px-8 py-3">Logout</button> 
                         </div>
                          :    
-                     <div className="flex pr-4 md:justify-end">
+
+                        <div className="flex pr-4 md:justify-end">
                             <button className="border-none bg-transparent text-black mr-4"><NavLink to="/login">Sign In</NavLink></button> 
-                        <button className="px-8 py-3"><NavLink to="/signup">Sign Up</NavLink></button>
+                            <button className="px-8 py-3"><NavLink to="/signup">Sign Up</NavLink></button>
+
                         </div>
                     }
-                    </div>       
+                    </div>  
+                    <div>
+
+{/* <div className="flex justify-center">
+  <div className="mb-3 xl:w-96">
+ 
+    <input
+      onChange={onSearch}
+      type="search"
+      className="
+        form-control
+        block
+        w-full
+        px-3
+        py-1.5
+        text-base
+        font-normal
+        text-gray-700
+        bg-white bg-clip-padding
+        border border-solid border-gray-300
+        rounded
+        transition
+        ease-in-out
+        m-0
+        focus:text-gray-700 focus:bg-white focus:border-rose-500 focus:outline-none
+      "
+      id="exampleSearch2"
+      placeholder="Search"
+    />
+  </div>
+</div> */}
+                    </div>     
             </div>
-        </div>
+        
     )
 }
 

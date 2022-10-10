@@ -1,6 +1,6 @@
-function Makeup(){
+function MakeupFilter(){
     return(
-        <div>
+        <div className="">
          <div id="filter-by-select">
             <select>
             <option value="">Filter By</option>
@@ -15,4 +15,4 @@ function Makeup(){
     )
 }
 
-export default Makeup;
+export default MakeupFilter;

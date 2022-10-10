@@ -1,9 +1,6 @@
 class UsersController < ApplicationController
     skip_before_action :authenticate_user, only: :create
-    #GET '/userss'
-    def index 
-        render json: User.all, status: :ok
-    end
+   
 
     #GET '/users/:id'
     def show 

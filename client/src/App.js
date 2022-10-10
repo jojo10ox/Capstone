@@ -3,13 +3,12 @@ import Login from './components/Login';
 import Signup from './components/Signup';
 import Navbar from './components/Navbar';
 import { Route } from 'react-router-dom';
-import { Switch } from 'react-router-dom';
 import { useState, useEffect } from "react";
 import MakeupContainer from './components/MakeupContainer';
 import NewReview from './components/NewReview';
-import { useParams } from "react-router-dom";
 import DisplayReviews from './components/DisplayReviews';
 import { Routes } from 'react-router-dom';
+import MakeupFilter from './components/MakeupFilter';
 
 
 
@@ -26,6 +25,7 @@ function App() {
   const [sendMakeup, setSendMakeup] = useState({})
   const [savedMakeup, setSavedMakeup] = useState([])
   const [change, setChange] = useState(false);
+  const [search, setSearch] = useState("")
 
 
 
@@ -66,7 +66,7 @@ function App() {
       });
       }
     });
-    }, [change])
+    }, [])
 
     const getSavedMakeup = () => {
       fetch('/makeups')
@@ -75,32 +75,43 @@ function App() {
 
     }
     
-    useEffect(() => {getSavedMakeup()}, [change])
+    useEffect(() => {getSavedMakeup()}, [])
 
-    //handle delete 
-    const handleDelete = () => {
-      getSavedMakeup();
-    };
-
+    //add review to new makeup
+    const handleFirstReview = (newMakeup, name) => {
+      setSavedMakeup([...savedMakeup.filter(makeup => makeup.name !== name), newMakeup])
+    }
 
     // add review
-    const addReview = (review) => setReviews(current => [...current,review])
+    const addReview = (newReview, makeupId) => {
+      const copyOfMakeup = [...savedMakeup]
+      const makeup_index = copyOfMakeup.findIndex((makeupObj) => makeupObj.id === makeupId)
+      copyOfMakeup[makeup_index].reviews = [...copyOfMakeup[makeup_index].reviews, newReview]
+      setSavedMakeup(copyOfMakeup)
+      // setSavedMakeup([...savedMakeup, newReview])
+    
+    }
 
+    //delete review
+    const deleteReview = (reviewToDelete, makeupId) => {
+      const copyOfMakeup = [...savedMakeup]
+      const makeup_index = copyOfMakeup.findIndex((makeupObj) => makeupObj.id === makeupId)
+      copyOfMakeup[makeup_index].reviews = copyOfMakeup[makeup_index].reviews?.filter(review => review.id !== reviewToDelete.id)
+      setSavedMakeup(copyOfMakeup)
+    }
+ 
+     
 
-
-    //handle edit review click
-    function handleEditClick(e, currentUser){
-      e.preventDefault()
-      setEditContactId(currentUser.id)
+    const handlePatch = (updatedReview, makeupId) => {
+      const copyOfMakeup = [...savedMakeup]
+      const makeup_index = copyOfMakeup.findIndex((makeupObj) => makeupObj.id === makeupId)
+      copyOfMakeup[makeup_index].reviews = copyOfMakeup[makeup_index].reviews?.map((review) =>
+      review.id === updatedReview.id ? updatedReview : review)
+      setSavedMakeup(copyOfMakeup)
     }
 
 
-
-    // add update 
-    const onUpdateReview = (review) => setReviews(current => [...current,review])
-
-
-    const deleteReview = (id) => setReviews(current => current.filter(r => r.id !== id)) 
+    const filteredMakeup = makeupApi.filter(makeup => makeup.name.toLowerCase().includes(search.toLowerCase()))
   
 
   return (
@@ -110,19 +121,25 @@ function App() {
           {/* <Route path="/reviews" element={<ReviewedMakeup reviews={reviews}/>}/>  */}
           <Route path="/signup" element={<Signup setCurrentUser={setCurrentUser}/>}/>
           <Route path="/login" element={<Login setCurrentUser={setCurrentUser}/>} />
-          <Route path="/" element={ <MakeupContainer makeupsApi={makeupApi} setSendMakeup={setSendMakeup} currentUser={currentUser}/>}/>
+          <Route path="/" element={ 
+            <div>
+               <MakeupContainer makeupsApi={filteredMakeup} setSendMakeup={setSendMakeup} currentUser={currentUser} setSearch={setSearch}/>
+               {/* <MakeupFilter/> */}
+            </div>}/>
           <Route path="/reviews" element={ 
             <DisplayReviews 
               change={change}
               reviews={reviews}
               addReview={addReview} 
               currentUser={currentUser} 
-              handleDelete={handleDelete}
               setChange={setChange}
               savedMakeup={savedMakeup}
+              handlePatch={handlePatch}
+              deleteReview={deleteReview}
+
               /> 
               }/>
-          <Route path="/review/new" element={<NewReview makeup={makeupApi} sendMakeup={sendMakeup} currentUser={currentUser} change={change} setChange={setChange}/>}/>
+          <Route path="/review/new" element={<NewReview handleFirstReview={handleFirstReview} makeup={makeupApi} sendMakeup={sendMakeup} currentUser={currentUser} change={change} setChange={setChange}/>}/>
       </Routes>
     </div>
   );

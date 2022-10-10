@@ -1,10 +1,10 @@
 import { useState } from "react"
 
-function EditReview({makeupReview, makeupUser,rev, userReviews, makeup, currentUser, change, setChange, handleDelete}){
-// console.log(makeupReview)
+function EditReview({makeupReview, deleteReview, handlePatch, makeupUser,rev, userReviews, makeup, currentUser, change, setChange}){
 
-    const {rating, description_title, review_description, state } = makeupReview
-    const [ratingUpdate, setRatingUpdate] = useState(rating)
+
+    const {star, description_title, review_description, state } = makeupReview
+    const [ratingUpdate, setRatingUpdate] = useState(star)
     const [descriptionTitleUpdate, setdescriptionTitleUpdate] = useState(description_title)
     const [descriptionUpdate, setdescriptionUpdate] = useState(review_description)
     const [stateUpdate, setStateUpdate] = useState(state)
@@ -25,38 +25,55 @@ function EditReview({makeupReview, makeupUser,rev, userReviews, makeup, currentU
         const formData = {
             makeup_id: makeup.id,
             user_id: currentUser.id,
-            rating: ratingUpdate,
+            star: ratingUpdate,
             description_title: descriptionTitleUpdate,
             review_description: descriptionUpdate,
             state: stateUpdate
         };
 
-        console.log(formData)
+        // console.log(formData)
 
         fetch(`/reviews/${makeupReview.id}`, {
             method: "PATCH",
             headers: {"Content-type": "application/json"},
-            body: JSON.stringify(formData),
-        }).then((res) => {
-            if (res.ok) {
-                res.json().then(setChange(!change))
-            } else {
-                res.json().then((errors) => setErrors(errors.errors));
-            }
-        });
+            body: JSON.stringify(formData)
+        })
+        .then((resp) => resp.json())
+        .then(review => {
+             handlePatch(review, review.makeup.id)
+        })
+
+        // .then((res) => {
+        //     if (res.ok) {
+        //         res.json().then(setChange(!change))
+        //     } else {
+        //         res.json().then((errors) => setErrors(errors.errors));
+        //     }
+        // });
     }
 
     function handleDelete() {
         fetch(`/reviews/${makeupReview.id}`, {
             method: "DELETE",
-        }).then((res) => {
-            if (res.ok) {
-                setChange(!change); // passed down from App
-            } else {
-                res.json().then((json) => setErrors(json.errors));
-            }
+        })
+        .then(res => res.json())
+        .then(review => {
+        // console.log(review.makeup.id) 
+         
+        deleteReview(review, review.makeup.id)
         });
     }
+
+// console.log(makeupReview)
+        
+        // .then((res) => {
+        //     if (res.ok) {
+        //         setChange(!change); // passed down from App
+        //     } else {
+        //         res.json().then((json) => setErrors(json.errors));
+        //     }
+        // });
+   
 
    
 // const test= userReviews.map((u, i)=>{
@@ -103,7 +120,7 @@ function EditReview({makeupReview, makeupUser,rev, userReviews, makeup, currentU
 
     return(
         <div>
-            <div className="flex">
+            <div className="flex justify-between">
                 {currentUser.id ?  <button className="w-8 h-6" onClick={handleReviews}>Edit</button> :null}
                 {/* {test} */}
                 {/* {currentUser.id ?  
@@ -118,9 +135,10 @@ function EditReview({makeupReview, makeupUser,rev, userReviews, makeup, currentU
                         // </svg> 
                 :null}  */}
                 {currentUser.id ?  
-                    <svg onClick={handleDelete} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
+                    // <svg onClick={handleDelete} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                    // <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    // </svg>
+                    <button className="bg-neutral-500" onClick={handleDelete}>Delete</button>
                 :null} 
                
 
@@ -130,9 +148,12 @@ function EditReview({makeupReview, makeupUser,rev, userReviews, makeup, currentU
             </div>
             <div>
  {showReview?  
-                    <form>
+                    <form className="bg-red-50 py-4 px-6 shadow rounded-lg sm:px-10 space-y-2">
+                        <h1 className="tracking-wide text-black text-lg underline font-bold mb-5" >Edit Review</h1>
+                        <div className="">
+                            <h1><strong>Description Title</strong></h1>
                                 <div>
-                                    <input className="text-black border"
+                                    <input className="text-black border rounded-md"
                                     id="description_title" 
                                     type="text"
                                     placeholder="Please enter a title."
@@ -141,17 +162,23 @@ function EditReview({makeupReview, makeupUser,rev, userReviews, makeup, currentU
                                     >
                                     </input>
                                 </div>
+                            </div>
+                            <div>
+                                <h1><strong>Rating</strong></h1>
                                 <div>
-                                    <input className="text-black border"
-                                    id="rating"
+                                    <input className="text-black border rounded-md "
+                                    id="star"
                                     type="number"
                                     onChange={(e) => setRatingUpdate(e.target.value)}
                                     value={ratingUpdate}
                                     >
                                     </input>
                                 </div>
+                            </div>
+                            <div>
+                                <h1><strong>Description</strong></h1>
                                 <div>
-                                    <input className="text-black border h-40"
+                                    <input className="text-black border h-20 rounded-md "
                                     id="description"
                                     type="text" 
                                     placeholder="Please enter a description."
@@ -160,8 +187,11 @@ function EditReview({makeupReview, makeupUser,rev, userReviews, makeup, currentU
                                     >
                                     </input>
                                 </div>
+                            </div>
+                            <div>
+                                <h1><strong>State</strong></h1>
                                 <div>
-                                    <input className="text-black border"
+                                    <input className="text-black border rounded-md "
                                     id="state"
                                     type="text" 
                                     placeholder="Texas"
@@ -170,7 +200,8 @@ function EditReview({makeupReview, makeupUser,rev, userReviews, makeup, currentU
                                     >
                                     </input>
                                 </div>
-                                <button onClick={updateReview}>save</button> 
+                            </div>
+                                <button className="w-20" onClick={updateReview}>save</button> 
                             </form> 
                         : null } 
                             {/* <button onClick={handleCancelClick}>cancel</button> */} 
