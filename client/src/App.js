@@ -112,7 +112,21 @@ function App() {
 
 
     const filteredMakeup = makeupApi.filter(makeup => makeup.name.toLowerCase().includes(search.toLowerCase()))
+    // const filteredCategory = makeupApi.filter(makeup => makeup.category.toLowerCase().includes(search.toLowerCase()))
   
+    // const [filterCategory, setFilterCategory] = useState(false)
+
+    // const handleFilterCategory = (filterC) => {
+    //   setFilterCategory(filterC)
+    // }
+
+    // const sortedCategory = () => {
+    //   if(filterCategory === "lipstick"){
+    //     return filteredCategory.filter(makeup => makeup.category.includes('Category'))
+    //   }
+    // }
+
+    // console.log(makeupApi)
 
   return (
     <div>
