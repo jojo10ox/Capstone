@@ -44,6 +44,7 @@ function NewReview({addReview, handleFirstReview , change, setChange, sendMakeup
         // })
         e.target.reset()
     }
+
 //  console.log(formData)
 
     return(
@@ -91,6 +92,7 @@ function NewReview({addReview, handleFirstReview , change, setChange, sendMakeup
             {errors ? <div>{errors}</div> : null}
         </div>
         </div>
+
 
     )
 }

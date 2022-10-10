@@ -2,8 +2,6 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 
-
-
 function MakeupCard({makeup, setSendMakeup, currentUser}){
   
     const [showDescription, setShowDescription] = useState(false)

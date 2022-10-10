@@ -42,9 +42,11 @@ function Navbar({currentUser, setCurrentUser, setSearch}){
                                 <button onClick={handleLogout} className="px-8 py-3">Logout</button> 
                         </div>
                          :    
+
                         <div className="flex pr-4 md:justify-end">
                             <button className="border-none bg-transparent text-black mr-4"><NavLink to="/login">Sign In</NavLink></button> 
                             <button className="px-8 py-3"><NavLink to="/signup">Sign Up</NavLink></button>
+
                         </div>
                     }
                     </div>  
